@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState, useEffect, useRef, useMemo } from "react";
-import { Mail, Phone, MapPin, Send, Search, ChevronDown, Copy } from "lucide-react";
+import { Mail, Phone, MapPin, Send, Search, ChevronDown } from "lucide-react";
 import {
   getCountryCallingCode,
   AsYouType,
@@ -26,6 +26,7 @@ export const Contact = () => {
   const dropdownRef = useRef<HTMLDivElement>(null);
   const triggerRef = useRef<HTMLButtonElement>(null);
   const searchInputRef = useRef<HTMLInputElement>(null);
+  const listRef = useRef<HTMLDivElement>(null);
 
   const countries = useMemo(() =>
     getCountries().map((c) => ({
@@ -59,14 +60,26 @@ export const Contact = () => {
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
+  // Voltar o foco para o botão quando fechar o menu e limpar busca
   useEffect(() => {
     if (!isDropdownOpen && triggerRef.current) {
       triggerRef.current.focus();
+      setSearchQuery("");
     }
     if (isDropdownOpen) {
       setFocusedIndex(-1);
     }
   }, [isDropdownOpen]);
+
+  // Scroll automático para manter o item focado visível
+  useEffect(() => {
+    if (isDropdownOpen && focusedIndex >= 0 && listRef.current) {
+      const focusedItem = listRef.current.children[focusedIndex] as HTMLElement;
+      if (focusedItem) {
+        focusedItem.scrollIntoView({ block: "nearest" });
+      }
+    }
+  }, [focusedIndex, isDropdownOpen]);
 
   const content = {
     title: "Vamos construir algo incrível",
@@ -122,7 +135,11 @@ export const Contact = () => {
   const validateForm = (data: { name: string; fullPhone: string; message: string }) => {
     const newErrors: Record<string, string> = {};
     if (!data.name.trim()) newErrors.name = "O nome é obrigatório";
-    if (!data.message.trim()) newErrors.message = "A mensagem é obrigatória";
+    if (!data.message.trim()) {
+      newErrors.message = "A mensagem é obrigatória";
+    } else if (data.message.length > 2000) {
+      newErrors.message = "Mensagem muito longa (máx 2000 caracteres)";
+    }
 
     if (!localNumber.trim()) {
       newErrors.phone = "O telefone é obrigatório";
@@ -214,7 +231,7 @@ export const Contact = () => {
   };
 
   return (
-    <section id="contato" className="section-padding bg-zinc-50 relative overflow-hidden">
+    <section id="contact" className="section-padding bg-zinc-50 relative overflow-hidden">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
@@ -285,10 +302,14 @@ export const Contact = () => {
             <form onSubmit={handleSubmit} className="space-y-10">
               <div className="grid grid-cols-1 gap-10">
                 <div className="space-y-3">
-                  <label className="text-xs font-black text-secondary uppercase tracking-widest px-1">
+                  <label
+                    htmlFor="contact-name"
+                    className="text-xs font-black text-secondary uppercase tracking-widest px-1 cursor-pointer"
+                  >
                     {content.form.name} <span className="text-red-500 ml-1">*</span>
                   </label>
                   <input
+                    id="contact-name"
                     type="text"
                     name="name"
                     placeholder="Seu nome completo"
@@ -299,7 +320,10 @@ export const Contact = () => {
                 </div>
 
                 <div className="space-y-3">
-                  <label className="text-xs font-black text-secondary uppercase tracking-widest px-1">
+                  <label
+                    htmlFor="contact-phone"
+                    className="text-xs font-black text-secondary uppercase tracking-widest px-1 cursor-pointer"
+                  >
                     {content.form.phone} <span className="text-red-500 ml-1">*</span>
                   </label>
 
@@ -345,6 +369,7 @@ export const Contact = () => {
                             </div>
                           </div>
                           <div
+                            ref={listRef}
                             className="overflow-y-auto max-h-[300px] overscroll-contain"
                             aria-label="Lista de países"
                           >
@@ -384,6 +409,7 @@ export const Contact = () => {
                     </div>
 
                     <input
+                      id="contact-phone"
                       type="tel"
                       value={localNumber}
                       onChange={handlePhoneChange}
@@ -396,10 +422,14 @@ export const Contact = () => {
               </div>
 
               <div className="space-y-3">
-                <label className="text-xs font-black text-secondary uppercase tracking-widest px-1">
+                <label
+                  htmlFor="contact-message"
+                  className="text-xs font-black text-secondary uppercase tracking-widest px-1 cursor-pointer"
+                >
                   {content.form.message} <span className="text-red-500 ml-1">*</span>
                 </label>
                 <textarea
+                  id="contact-message"
                   rows={4}
                   name="message"
                   placeholder="Conte-nos um pouco sobre seu projeto..."
@@ -412,8 +442,7 @@ export const Contact = () => {
               <button
                 type="submit"
                 disabled={isSubmitting}
-                className={`btn-primary w-full flex items-center justify-center gap-3 py-6 text-lg uppercase tracking-widest shadow-xl shadow-primary/20 cursor-pointer mt-4 transition-all duration-300 ${isSubmitting ? "opacity-70 scale-[0.98] grayscale" : ""
-                  }`}
+                className="group btn-primary w-full flex items-center justify-center gap-3 py-6 text-lg uppercase tracking-widest shadow-xl shadow-primary/20 cursor-pointer mt-4 transition-all duration-300 disabled:opacity-70 disabled:scale-[0.98] disabled:grayscale"
               >
                 {isSubmitting ? (
                   <span className="flex items-center gap-2 animate-pulse">
@@ -422,7 +451,7 @@ export const Contact = () => {
                 ) : (
                   <>
                     <span>{content.form.submit}</span>
-                    <Send className="w-5 h-5 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
+                    <Send className="w-5 h-5 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform duration-300" />
                   </>
                 )}
               </button>
