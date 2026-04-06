@@ -18,7 +18,6 @@ import "react-phone-number-input/style.css";
 export const Contact = () => {
   const [country, setCountry] = useState<CountryCode>("BR");
   const [localNumber, setLocalNumber] = useState("");
-  const [isSubmitting, setIsSubmitting] = useState(false);
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
@@ -52,10 +51,9 @@ export const Contact = () => {
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
-      if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
-        setIsDropdownOpen(false);
-      }
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) setIsDropdownOpen(false);
     };
+
     document.addEventListener("mousedown", handleClickOutside);
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
@@ -66,9 +64,7 @@ export const Contact = () => {
       triggerRef.current.focus();
       setSearchQuery("");
     }
-    if (isDropdownOpen) {
-      setFocusedIndex(-1);
-    }
+    if (isDropdownOpen) setFocusedIndex(-1);
   }, [isDropdownOpen]);
 
   // Scroll automático para manter o item focado visível
@@ -153,7 +149,6 @@ export const Contact = () => {
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    setIsSubmitting(true);
     setErrors({});
 
     const formData = new FormData(e.currentTarget);
@@ -167,22 +162,19 @@ export const Contact = () => {
     };
 
     if (!validateForm(data)) {
-      setIsSubmitting(false);
       return;
     }
 
-    await new Promise(resolve => setTimeout(resolve, 800));
 
     let body = `Nome: ${data.name}\r\n`;
     body += `Telefone: ${fullPhone}\r\n`;
-    body += `\r\nMensagem:\r\n${data.message}`;
+    body += `\r\n${data.message}`;
 
     const mailtoLink = `mailto:${content.email}?subject=${encodeURIComponent(
       "Solicitação de Orçamento - Catch-up Tech"
     )}&body=${encodeURIComponent(body)}`;
 
     window.location.href = mailtoLink;
-    setIsSubmitting(false);
   };
 
   const handleKeyDown = (e: React.KeyboardEvent) => {
@@ -243,10 +235,10 @@ export const Contact = () => {
 
           <div className="space-y-12">
             <div className="space-y-6">
-              <h2 className="title-main text-gradient lg:!text-7xl">
+              <h2 className="title-main text-gradient text-4xl sm:text-5xl lg:!text-7xl leading-[1.1]">
                 {content.title}
               </h2>
-              <p className="text-muted text-lg font-medium leading-relaxed max-w-xl">
+              <p className="text-muted text-base sm:text-lg font-medium leading-relaxed max-w-xl">
                 {content.description}
               </p>
             </div>
@@ -263,12 +255,12 @@ export const Contact = () => {
                         // Opcional: Copiar ao clicar se desejar, mas vamos focar no ícone como ação primária de link
                         // copyToClipboard(item.value, item.label);
                       }}
-                      className="w-14 h-14 rounded-2xl bg-white shadow-premium flex items-center justify-center text-primary group-hover:scale-110 group-hover:bg-primary group-hover:text-white transition-all duration-500 cursor-pointer"
+                      className="w-14 h-14 rounded-2xl bg-white shadow-premium flex items-center justify-center text-primary group-hover:scale-110 group-hover:bg-primary group-hover:text-white transition-all duration-500 cursor-pointer flex-shrink-0"
                     >
                       <item.icon className="w-6 h-6" />
                     </a>
                   ) : (
-                    <div className="w-14 h-14 rounded-2xl bg-white shadow-premium flex items-center justify-center text-primary transition-transform duration-500">
+                    <div className="w-14 h-14 rounded-2xl bg-white shadow-premium flex items-center justify-center text-primary transition-transform duration-500 flex-shrink-0">
                       <item.icon className="w-6 h-6" />
                     </div>
                   )}
@@ -281,12 +273,12 @@ export const Contact = () => {
                         href={item.link}
                         target={item.link.startsWith("http") ? "_blank" : undefined}
                         rel={item.link.startsWith("http") ? "noopener noreferrer" : undefined}
-                        className={`text-xl font-black text-secondary tracking-tight hover:text-primary transition-colors ${item.italic ? "italic" : ""}`}
+                        className={`text-lg sm:text-xl font-black text-secondary tracking-tight hover:text-primary transition-colors ${item.italic ? "italic" : ""}`}
                       >
                         {item.value}
                       </a>
                     ) : (
-                      <p className={`text-xl font-black text-secondary tracking-tight ${item.italic ? "italic" : ""}`}>
+                      <p className={`text-lg sm:text-xl font-black text-secondary tracking-tight ${item.italic ? "italic" : ""}`}>
                         {item.value}
                       </p>
                     )}
@@ -296,7 +288,7 @@ export const Contact = () => {
             </div>
           </div>
 
-          <div className="card p-10 lg:p-16 bg-white shadow-2xl relative overflow-hidden">
+          <div className="card p-6 sm:p-10 lg:p-16 bg-white shadow-2xl relative overflow-hidden">
             <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-primary to-secondary" />
 
             <form onSubmit={handleSubmit} className="space-y-10">
@@ -338,21 +330,21 @@ export const Contact = () => {
                         aria-haspopup="listbox"
                         aria-expanded={isDropdownOpen}
                         aria-label="Selecionar país de origem"
-                        className="h-full min-w-[120px] flex items-center justify-center gap-2.5 px-4 py-4 hover:bg-slate-100/5 transition-colors border-r border-slate-200 group cursor-pointer"
+                        className="h-full min-w-[85px] sm:min-w-[100px] lg:min-w-[120px] flex items-center justify-center gap-2 px-2 sm:px-4 py-4 hover:bg-slate-100/5 transition-colors border-r border-slate-200 group cursor-pointer"
                       >
-                        <span className="text-sm font-black text-secondary/60 tracking-wider transition-colors group-hover:text-primary">
+                        <span className="text-xs sm:text-sm font-black text-secondary/60 tracking-wider transition-colors group-hover:text-primary">
                           {country}
                         </span>
-                        <span className="text-sm font-black text-secondary tracking-tighter">
+                        <span className="text-xs sm:text-sm font-black text-secondary tracking-tighter">
                           +{getCountryCallingCode(country)}
                         </span>
-                        <ChevronDown className={`w-3.5 h-3.5 text-slate-400 transition-opacity group-hover:opacity-100 ${isDropdownOpen ? "rotate-180 opacity-100" : "opacity-40"}`} />
+                        <ChevronDown className={`w-3 h-3 sm:w-3.5 sm:h-3.5 text-slate-400 transition-opacity group-hover:opacity-100 ${isDropdownOpen ? "rotate-180 opacity-100" : "opacity-40"}`} />
                       </button>
 
                       {isDropdownOpen && (
                         <div
                           role="listbox"
-                          className="absolute top-full left-0 mt-3 w-80 max-h-96 overflow-hidden bg-white/95 backdrop-blur-xl border border-slate-100 rounded-2xl shadow-[0_20px_50px_rgba(0,0,0,0.15)] z-50 animate-in fade-in zoom-in duration-200"
+                          className="absolute top-full left-0 mt-3 w-[calc(100vw-48px)] sm:w-80 max-h-96 overflow-hidden bg-white/95 backdrop-blur-xl border border-slate-100 rounded-2xl shadow-[0_20px_50px_rgba(0,0,0,0.15)] z-50 animate-in fade-in zoom-in duration-200"
                         >
                           <div className="p-3 border-b border-slate-50 sticky top-0 bg-white/10 backdrop-blur-md z-10">
                             <div className="relative">
@@ -414,7 +406,7 @@ export const Contact = () => {
                       value={localNumber}
                       onChange={handlePhoneChange}
                       placeholder={dynamicPlaceholder}
-                      className="flex-1 bg-transparent border-0 focus:ring-0 px-5 py-4 outline-none text-secondary placeholder:text-slate-300"
+                      className="flex-1 min-w-0 bg-transparent border-0 focus:ring-0 px-3 sm:px-5 py-4 outline-none text-sm sm:text-base text-secondary placeholder:text-slate-300"
                     />
                   </div>
                   {errors.phone && <p className="text-[10px] text-red-500 font-bold uppercase tracking-wider px-1">{errors.phone}</p>}
@@ -441,19 +433,10 @@ export const Contact = () => {
 
               <button
                 type="submit"
-                disabled={isSubmitting}
-                className="group btn-primary w-full flex items-center justify-center gap-3 py-6 text-lg uppercase tracking-widest shadow-xl shadow-primary/20 cursor-pointer mt-4 transition-all duration-300 disabled:opacity-70 disabled:scale-[0.98] disabled:grayscale"
+                className="group btn-primary w-full flex items-center justify-center gap-3 py-6 text-lg uppercase tracking-widest shadow-xl shadow-primary/20 cursor-pointer mt-4 transition-all duration-300"
               >
-                {isSubmitting ? (
-                  <span className="flex items-center gap-2 animate-pulse">
-                    Enviando solicitação...
-                  </span>
-                ) : (
-                  <>
-                    <span>{content.form.submit}</span>
-                    <Send className="w-5 h-5 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform duration-300" />
-                  </>
-                )}
+                <span>{content.form.submit}</span>
+                <Send className="w-5 h-5 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform duration-300" />
               </button>
             </form>
           </div>
