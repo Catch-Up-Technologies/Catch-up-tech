@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState, useEffect, useRef, useMemo } from "react";
-import { Mail, Phone, MapPin, Send, Search, ChevronDown } from "lucide-react";
+import { Mail, Phone, Send, Search, ChevronDown } from "lucide-react";
 import {
   getCountryCallingCode,
   AsYouType,
@@ -82,7 +82,6 @@ export const Contact = () => {
     description: "Pronto para transformar sua visão em realidade? Nossa equipe de especialistas está pronta para acelerar seu produto digital.",
     email: "catchuptech@outlook.com",
     phone: "+55 (53) 99999-9999",
-    location: "Global / Remoto",
     form: {
       name: "Nome Completo",
       phone: "Número de Contato",
@@ -103,12 +102,6 @@ export const Contact = () => {
       label: "Entre em contato",
       value: content.phone,
       link: `https://wa.me/${content.phone.replace(/\D/g, "")}`
-    },
-    {
-      icon: MapPin,
-      label: "Localização",
-      value: content.location,
-      italic: true
     },
   ];
 
@@ -246,42 +239,26 @@ export const Contact = () => {
             <div className="space-y-8 pt-8">
               {contact.map((item, idx) => (
                 <div key={idx} className="flex items-center gap-6 group relative">
-                  {item.link ? (
-                    <a
-                      href={item.link}
-                      target={item.link.startsWith("http") ? "_blank" : undefined}
-                      rel={item.link.startsWith("http") ? "noopener noreferrer" : undefined}
-                      onClick={(e) => {
-                        // Opcional: Copiar ao clicar se desejar, mas vamos focar no ícone como ação primária de link
-                        // copyToClipboard(item.value, item.label);
-                      }}
-                      className="w-14 h-14 rounded-2xl bg-white shadow-premium flex items-center justify-center text-primary group-hover:scale-110 group-hover:bg-primary group-hover:text-white transition-all duration-500 cursor-pointer flex-shrink-0"
-                    >
-                      <item.icon className="w-6 h-6" />
-                    </a>
-                  ) : (
-                    <div className="w-14 h-14 rounded-2xl bg-white shadow-premium flex items-center justify-center text-primary transition-transform duration-500 flex-shrink-0">
-                      <item.icon className="w-6 h-6" />
-                    </div>
-                  )}
+                  <a
+                    href={item.link}
+                    target={item.link.startsWith("http") ? "_blank" : undefined}
+                    rel={item.link.startsWith("http") ? "noopener noreferrer" : undefined}
+                    className="w-14 h-14 rounded-2xl bg-white shadow-premium flex items-center justify-center text-primary group-hover:scale-110 group-hover:bg-primary group-hover:text-white transition-all duration-500 cursor-pointer flex-shrink-0"
+                  >
+                    <item.icon className="w-6 h-6" />
+                  </a>
                   <div>
                     <p className="text-[10px] font-black text-primary uppercase tracking-[0.2em] mb-1 opacity-70">
                       {item.label}
                     </p>
-                    {item.link ? (
-                      <a
-                        href={item.link}
-                        target={item.link.startsWith("http") ? "_blank" : undefined}
-                        rel={item.link.startsWith("http") ? "noopener noreferrer" : undefined}
-                        className={`text-lg sm:text-xl font-black text-secondary tracking-tight hover:text-primary transition-colors ${item.italic ? "italic" : ""}`}
-                      >
-                        {item.value}
-                      </a>
-                    ) : (
-                      <p className={`text-lg sm:text-xl font-black text-secondary tracking-tight ${item.italic ? "italic" : ""}`}>
-                        {item.value}
-                      </p>
-                    )}
+                    <a
+                      href={item.link}
+                      target={item.link.startsWith("http") ? "_blank" : undefined}
+                      rel={item.link.startsWith("http") ? "noopener noreferrer" : undefined}
+                      className="text-lg sm:text-xl font-black text-secondary tracking-tight hover:text-primary transition-colors"
+                    >
+                      {item.value}
+                    </a>
                   </div>
                 </div>
               ))}
