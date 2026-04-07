@@ -1,31 +1,56 @@
+"use client";
+
 import Image from "next/image";
-import { ArrowRight } from "lucide-react";
+import { motion } from "framer-motion";
 
 export const Hero = () => (
   <section className="relative overflow-hidden mesh-gradient min-h-[95vh] flex items-center">
     <div className="section-padding pt-32 lg:pt-40 flex flex-col lg:flex-row items-center gap-16 max-w-7xl mx-auto w-full relative z-10">
-      <div className="flex-1 text-center lg:text-left space-y-8 animate-in fade-in slide-in-from-left-20 duration-1000 ease-out">
+      <div className="flex-1 text-center lg:text-left space-y-8">
 
-        <h1 className="title-main text-gradient italic">
+        <motion.h1 
+          initial={{ opacity: 0, x: -30 }}
+          whileInView={{ opacity: 1, x: 0 }}
+          viewport={{ once: false }}
+          transition={{ duration: 0.8, ease: "easeOut" }}
+          className="title-main text-gradient italic"
+        >
           Desenvolvemos software que escala seu negócio
-        </h1>
+        </motion.h1>
 
-        <p className="text-lg text-muted max-w-xl leading-relaxed mx-auto lg:mx-0 font-medium">
+        <motion.p 
+          initial={{ opacity: 0, x: -20 }}
+          whileInView={{ opacity: 1, x: 0 }}
+          viewport={{ once: false }}
+          transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
+          className="text-lg text-muted max-w-xl leading-relaxed mx-auto lg:mx-0 font-medium"
+        >
           Combinamos engenharia de excelência com design centrado no usuário para criar produtos digitais que dominam o mercado.
-        </p>
+        </motion.p>
 
-        <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start pt-6">
+        <motion.div 
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: false }}
+          transition={{ duration: 0.5, delay: 0.4 }}
+          className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start pt-6"
+        >
           <a
             href="#contact"
             className="btn-primary group flex items-center gap-2 text-base no-underline"
           >
             Solicitar orçamento
-            <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
           </a>
-        </div>
+        </motion.div>
       </div>
 
-      <div className="flex-1 relative w-full aspect-square lg:aspect-[3/2] animate-in fade-in slide-in-from-right-12 duration-1000 delay-200">
+      <motion.div 
+        initial={{ opacity: 0, scale: 0.95, x: 20 }}
+        whileInView={{ opacity: 1, scale: 1, x: 0 }}
+        viewport={{ once: false }}
+        transition={{ duration: 1, ease: "easeOut" }}
+        className="flex-1 relative w-full aspect-square lg:aspect-[3/2]"
+      >
         <div className="absolute inset-0 bg-primary/10 rounded-[2.5rem] blur-3xl -z-10 translate-x-8 translate-y-8 opacity-50" />
         <div className="relative h-full w-full rounded-[1.5rem] overflow-hidden shadow-2xl animate-float">
           <Image
@@ -36,7 +61,7 @@ export const Hero = () => (
             priority
           />
         </div>
-      </div>
+      </motion.div>
     </div>
   </section>
 );

@@ -1,7 +1,7 @@
 import { SideBar } from "@/components/landing/SideBar";
 import { Hero } from "@/components/landing/Hero";
-import { ProvaSocial } from "@/components/landing/ProvaSocial";
-import { Servicos } from "@/components/landing/Servicos";
+import { Partners } from "@/components/landing/Partners";
+import { Services } from "@/components/landing/Services";
 import { ComoFunciona } from "@/components/landing/ComoFunciona";
 import { Contact } from "@/components/landing/Contact";
 import { Footer } from "@/components/landing/Footer";
@@ -13,8 +13,8 @@ export default function Home() {
     <main className="min-h-screen bg-white">
       <SideBar />
       <Hero />
-      <ProvaSocial />
-      <Servicos />
+      <Services />
+      <Partners />
       <ComoFunciona />
       <Contact />
       <Footer />
