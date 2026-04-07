@@ -13,6 +13,7 @@ import examples from "libphonenumber-js/examples.mobile.json";
 import countryNames from "react-phone-number-input/locale/pt.json";
 import { getCountries } from "react-phone-number-input";
 import "react-phone-number-input/style.css";
+import Link from "next/link";
 
 
 export const Contact = () => {
@@ -58,8 +59,14 @@ export const Contact = () => {
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
-  // Voltar o foco para o botão quando fechar o menu e limpar busca
+  const isFirstRender = useRef(true);
+
   useEffect(() => {
+    if (isFirstRender.current) {
+      isFirstRender.current = false;
+      return;
+    }
+
     if (!isDropdownOpen && triggerRef.current) {
       triggerRef.current.focus();
       setSearchQuery("");
@@ -408,13 +415,18 @@ export const Contact = () => {
                 {errors.message && <p className="text-[10px] text-red-500 font-bold uppercase tracking-wider px-1">{errors.message}</p>}
               </div>
 
-              <button
-                type="submit"
-                className="group btn-primary w-full flex items-center justify-center gap-3 py-6 text-lg uppercase tracking-widest shadow-xl shadow-primary/20 cursor-pointer mt-4 transition-all duration-300"
-              >
-                <span>{content.form.submit}</span>
-                <Send className="w-5 h-5 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform duration-300" />
-              </button>
+              <div className="space-y-4">
+                <button
+                  type="submit"
+                  className="group btn-primary w-full flex items-center justify-center gap-3 py-6 text-base shadow-xl shadow-primary/20 cursor-pointer mt-4 transition-all duration-300"
+                >
+                  <span>{content.form.submit}</span>
+                  <Send className="w-5 h-5 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform duration-300" />
+                </button>
+                <p className="text-[11px] text-muted text-center font-medium opacity-70">
+                  Ao enviar este formulário, você concorda com nossa <Link href="/privacy-policy" className="text-primary hover:underline">Política de Privacidade</Link>
+                </p>
+              </div>
             </form>
           </div>
         </div>

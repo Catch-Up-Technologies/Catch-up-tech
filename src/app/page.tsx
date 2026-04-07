@@ -2,7 +2,7 @@ import { SideBar } from "@/components/landing/SideBar";
 import { Hero } from "@/components/landing/Hero";
 import { Partners } from "@/components/landing/Partners";
 import { Services } from "@/components/landing/Services";
-import { ComoFunciona } from "@/components/landing/ComoFunciona";
+import { Methodology } from "@/components/landing/Methodology";
 import { Contact } from "@/components/landing/Contact";
 import { Footer } from "@/components/landing/Footer";
 
@@ -14,8 +14,8 @@ export default function Home() {
       <SideBar />
       <Hero />
       <Services />
+      <Methodology />
       <Partners />
-      <ComoFunciona />
       <Contact />
       <Footer />
     </main>
