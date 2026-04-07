@@ -1,30 +1,40 @@
 "use client";
 
-import { Globe, Smartphone, Settings, Palette } from "lucide-react";
+import { Globe, Smartphone, Settings, Palette, Code, Sparkles } from "lucide-react";
 import { motion, Variants } from "framer-motion";
 
 export const Services = () => {
   const items = [
     {
+      title: "IA e Automação",
+      desc: "Aplicamos inteligência artificial e automações para otimizar processos, reduzir tarefas manuais e gerar insights estratégicos para o seu negócio.",
+      icon: Sparkles,
+    },
+    {
       title: "Desenvolvimento Web",
-      desc: "Sistemas web robustos, escaláveis e otimizados utilizando as tecnologias mais modernas do mercado.",
+      desc: "Criamos sistemas web escaláveis e sob medida, focados em performance, segurança e evolução contínua do seu produto.",
       icon: Globe,
     },
     {
       title: "Apps Mobile",
-      desc: "Experiências nativas e híbridas de alta performance para iOS e Android com foco em UX.",
+      desc: "Desenvolvemos aplicativos móveis com foco em experiência do usuário, performance e integração com seu ecossistema digital.",
       icon: Smartphone,
     },
     {
       title: "APIs & Integrações",
-      desc: "Conectamos sua aplicação com qualquer ecossistema de forma segura, rápida e eficiente.",
+      desc: "Conectamos sistemas e serviços através de APIs robustas, automatizando processos e aumentando a produtividade.",
       icon: Settings,
     },
     {
-      title: "UX/UI Design",
-      desc: "Interfaces intuitivas e centradas no usuário, focadas na melhor experiência e conversão.",
-      icon: Palette,
+      title: "Arquitetura de Software",
+      desc: "Projetamos arquiteturas modernas e bem estruturadas, facilitando manutenção, escalabilidade e crescimento do sistema.",
+      icon: Code,
     },
+    {
+      title: "UX/UI Design",
+      desc: "Criamos interfaces intuitivas, atraentes e centradas no usuário, garantindo uma experiência fluida e de alto impacto.",
+      icon: Palette,
+    }
   ];
 
   const containerVariants: Variants = {
@@ -62,7 +72,7 @@ export const Services = () => {
           transition={{ duration: 0.8, ease: "easeOut" }}
           className="text-center mb-24 space-y-4"
         >
-          <h2 className="title-section">Nossos serviços</h2>
+          <h2 className="title-section">Nossos Serviços</h2>
           <motion.div
             initial={{ width: 0, opacity: 0 }}
             whileInView={{ width: "5rem", opacity: 1 }}
@@ -76,7 +86,7 @@ export const Services = () => {
           initial="hidden"
           whileInView="visible"
           viewport={{ once: false, amount: 0.2 }}
-          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8"
+          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8"
         >
           {items.map((item, i) => (
             <motion.div

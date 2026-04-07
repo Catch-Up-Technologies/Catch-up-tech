@@ -77,7 +77,7 @@ body {
 
 /* --- Tipografia --- */
 .title-main {
-  @apply text-4xl lg:text-6xl font-black text-secondary leading-[1.1] tracking-tighter uppercase italic;
+  @apply text-4xl lg:text-5xl font-black text-secondary leading-[1.1] tracking-tighter uppercase italic;
 }
 
 .title-section {

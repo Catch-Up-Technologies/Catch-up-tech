@@ -1,8 +1,18 @@
 "use client";
 
+import { useEffect, useState } from "react";
 import { motion, useInView, Variants } from "framer-motion";
 
 export const Methodology = () => {
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const checkMobile = () => setIsMobile(window.innerWidth < 1024);
+    checkMobile();
+    window.addEventListener("resize", checkMobile);
+    return () => window.removeEventListener("resize", checkMobile);
+  }, []);
+
   const content = {
     title: "Nossa Metodologia",
     desc: "Processos otimizados para garantir transparência, velocidade de entrega e qualidade técnica absoluta."
@@ -43,11 +53,18 @@ export const Methodology = () => {
   };
 
   const squareVariants: Variants = {
-    hidden: { scale: 0, rotate: -360, x: -100, opacity: 0 },
+    hidden: { 
+      scale: 0, 
+      rotate: -360, 
+      x: isMobile ? 0 : -100, 
+      y: isMobile ? -50 : 0, 
+      opacity: 0 
+    },
     visible: {
       scale: 1,
       rotate: 0,
       x: 0,
+      y: 0,
       opacity: 1,
       transition,
     },
@@ -107,10 +124,15 @@ export const Methodology = () => {
             >
               <motion.div
                 variants={{
-                  hidden: { opacity: 0, x: -50 },
+                  hidden: { 
+                    opacity: 0, 
+                    x: isMobile ? 0 : -50, 
+                    y: isMobile ? -30 : 0 
+                  },
                   visible: { 
                     opacity: 1, 
                     x: 0, 
+                    y: 0,
                     transition: { duration: 0.8 } 
                   }
                 }}

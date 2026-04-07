@@ -1,10 +1,10 @@
-import { SideBar } from "@/components/landing/SideBar";
-import { Hero } from "@/components/landing/Hero";
-import { Partners } from "@/components/landing/Partners";
-import { Services } from "@/components/landing/Services";
-import { Methodology } from "@/components/landing/Methodology";
-import { Contact } from "@/components/landing/Contact";
-import { Footer } from "@/components/landing/Footer";
+import { SideBar } from "@/components/home/SideBar";
+import { Hero } from "@/components/home/Hero";
+import { Partners } from "@/components/home/Partners";
+import { Services } from "@/components/home/Services";
+import { Methodology } from "@/components/home/Methodology";
+import { Contact } from "@/components/home/Contact";
+import { Footer } from "@/components/home/Footer";
 
 // --- Main Page ---
 

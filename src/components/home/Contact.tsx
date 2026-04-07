@@ -85,8 +85,8 @@ export const Contact = () => {
   }, [focusedIndex, isDropdownOpen]);
 
   const content = {
-    title: "Vamos construir algo incrível",
-    description: "Pronto para transformar sua visão em realidade? Nossa equipe de especialistas está pronta para acelerar seu produto digital.",
+    title: "Vamos tirar sua ideia do papel",
+    description: "Conte um pouco sobre o seu projeto e entraremos em contato para entender melhor suas necessidades e como podemos ajudar.",
     email: "catchuptech@outlook.com",
     phone: "+55 (53) 99999-9999",
     form: {
@@ -235,7 +235,7 @@ export const Contact = () => {
 
           <div className="space-y-12">
             <div className="space-y-6">
-              <h2 className="title-main text-gradient text-4xl sm:text-5xl lg:!text-7xl leading-[1.1]">
+              <h2 className="title-main text-gradient">
                 {content.title}
               </h2>
               <p className="text-muted text-base sm:text-lg font-medium leading-relaxed max-w-xl">
