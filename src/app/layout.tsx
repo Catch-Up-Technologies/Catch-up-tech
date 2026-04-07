@@ -13,8 +13,8 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Catch-up Tech | Modern Solutions",
-  description: "Experience the next generation of web applications with Catch-up Technologies.",
+  title: "Catch-up Tech | Soluções Modernas",
+  description: "Experimente a próxima geração de aplicações web com a Catch-up Technologies.",
 };
 
 export default function RootLayout({
@@ -24,7 +24,7 @@ export default function RootLayout({
 }>) {
   return (
     <html
-      lang="en"
+      lang="pt-br"
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased dark`}
     >
       <body className="min-h-full flex flex-col bg-mesh">{children}</body>
