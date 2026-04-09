@@ -1,4 +1,4 @@
-import { Home, Cpu, Rocket, Library, Building2 } from "lucide-react";
+import { Building2, Home, Library } from "lucide-react";
 
 export const navigation = [
   { id: "home", label: "Início", icon: Home, href: "/" },
@@ -6,7 +6,7 @@ export const navigation = [
     id: "resources",
     label: "Recursos",
     icon: Library,
-    href: "/",
+    href: "/faq",
     subItems: [
       { label: "FAQ", href: "/faq" },
     ]
