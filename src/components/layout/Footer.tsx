@@ -1,5 +1,6 @@
+"use client";
+
 import Link from "next/link";
-import { ArrowRight } from "lucide-react";
 
 const LinkedinIcon = ({ size = 24, ...props }: any) => (
   <svg
@@ -17,7 +18,9 @@ const LinkedinIcon = ({ size = 24, ...props }: any) => (
     <rect width="4" height="12" x="2" y="9" />
     <circle cx="4" cy="4" r="2" />
   </svg>
-); const InstagramIcon = ({ size = 24, ...props }: any) => (
+);
+
+const InstagramIcon = ({ size = 24, ...props }: any) => (
   <svg
     width={size}
     height={size}
@@ -34,94 +37,104 @@ const LinkedinIcon = ({ size = 24, ...props }: any) => (
     <line x1="17.5" x2="17.51" y1="6.5" y2="6.5" />
   </svg>
 );
+
 export const Footer = () => (
   <footer className="bg-[#0a0f1a] text-white">
-    <div className="max-w-7xl mx-auto px-6 py-12 lg:py-16 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-12 items-start">
+    <div className="max-w-7xl mx-auto px-6 py-16 lg:py-24 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12 lg:gap-24 items-start">
 
-      <div className="space-y-4 lg:col-span-1">
+      <div className="space-y-6">
         <div className="font-black text-2xl tracking-tighter uppercase leading-none">
           CATCH-UP<span className="text-primary italic">TECH</span>
         </div>
-        <p className="text-slate-500 text-sm leading-relaxed max-w-[220px] font-medium">
-          Engenharia de software de alta precisão para empresas que buscam escala e soberania digital.
+        <p className="text-slate-500 text-sm leading-relaxed max-w-sm font-medium">
+          Engenharia de software de alta precisão para empresas que buscam escala, robustez técnica e soberania digital em operações complexas.
         </p>
-        <div className="flex gap-4">
+        <div className="flex gap-4 pt-2">
           <Link
-            href="https://www.linkedin.com/company/catch-up-tech/"
+            href="https://www.linkedin.com/company/catchup-tech"
             target="_blank"
             rel="noopener noreferrer"
-            className="text-slate-500 hover:text-primary transition-all duration-300"
+            className="w-10 h-10 flex items-center justify-center bg-white/5 rounded-lg text-slate-500 hover:text-primary hover:bg-white/10 transition-all duration-300 border border-white/5"
             aria-label="LinkedIn"
           >
-            <LinkedinIcon size={22} />
+            <LinkedinIcon size={20} />
           </Link>
           <div
-            className="text-slate-700 cursor-not-allowed transition-all duration-300"
+            className="w-10 h-10 flex items-center justify-center bg-white/5 rounded-lg text-slate-700 cursor-not-allowed border border-white/5"
             title="Instagram - Em breve"
-            aria-label="Instagram (Em breve)"
           >
-            <InstagramIcon size={22} />
+            <InstagramIcon size={20} />
           </div>
         </div>
       </div>
 
-      <div className="space-y-4">
-        <h4 className="font-bold text-white text-base tracking-tight uppercase">Recursos</h4>
-        <ul className="space-y-2 text-sm text-slate-500 font-medium overflow-hidden">
+      <div className="space-y-6">
+        <h4 className="font-bold text-white text-sm tracking-widest uppercase opacity-50">Empresa</h4>
+        <ul className="space-y-4 text-sm text-slate-500 font-medium">
           <li>
-            <Link 
-              href="/faq" 
-              className="group flex items-center gap-2 hover:text-white transition-all duration-300"
-            >
-              <ArrowRight size={14} className="opacity-0 -ml-4 group-hover:opacity-100 group-hover:ml-0 transition-all duration-300 text-primary" />
-              <span>FAQ</span>
-            </Link>
-          </li>
-        </ul>
-      </div>
-
-      <div className="space-y-4">
-        <h4 className="font-bold text-white text-base tracking-tight uppercase">Empresa</h4>
-        <ul className="space-y-2 text-sm text-slate-500 font-medium overflow-hidden">
-          <li>
-            <Link 
-              href="/enterprise#about" 
-              className="group flex items-center gap-2 hover:text-white transition-all duration-300"
-            >
-              <ArrowRight size={14} className="opacity-0 -ml-4 group-hover:opacity-100 group-hover:ml-0 transition-all duration-300 text-primary" />
+            <Link href="/enterprise#about" className="group flex items-center gap-3 hover:text-white transition-all duration-300">
+              <span className="h-[1px] w-0 bg-primary group-hover:w-4 transition-all duration-300" />
               <span>Sobre nós</span>
             </Link>
           </li>
           <li>
-            <Link 
-              href="/enterprise#partners" 
-              className="group flex items-center gap-2 hover:text-white transition-all duration-300"
-            >
-              <ArrowRight size={14} className="opacity-0 -ml-4 group-hover:opacity-100 group-hover:ml-0 transition-all duration-300 text-primary" />
+            <Link href="/enterprise#partners" className="group flex items-center gap-3 hover:text-white transition-all duration-300">
+              <span className="h-[1px] w-0 bg-primary group-hover:w-4 transition-all duration-300" />
               <span>Parceiros</span>
             </Link>
           </li>
           <li>
-            <Link 
-              href="/enterprise#cases" 
-              className="group flex items-center gap-2 hover:text-white transition-all duration-300"
-            >
-              <ArrowRight size={14} className="opacity-0 -ml-4 group-hover:opacity-100 group-hover:ml-0 transition-all duration-300 text-primary" />
+            <Link href="/enterprise#cases" className="group flex items-center gap-3 hover:text-white transition-all duration-300">
+              <span className="h-[1px] w-0 bg-primary group-hover:w-4 transition-all duration-300" />
               <span>Cases</span>
             </Link>
           </li>
         </ul>
       </div>
+
+      <div className="space-y-6">
+        <h4 className="font-bold text-white text-sm tracking-widest uppercase opacity-50">Suporte</h4>
+        <ul className="space-y-4 text-sm text-slate-500 font-medium">
+          <li>
+            <Link href="/faq" className="group flex items-center gap-3 hover:text-white transition-all duration-300">
+              <span className="h-[1px] w-0 bg-primary group-hover:w-4 transition-all duration-300" />
+              <span>FAQ</span>
+            </Link>
+          </li>
+          <li>
+            <button
+              onClick={() => window.location.href = '/#contact'}
+              className="group flex items-center gap-3 hover:text-white transition-all duration-300 outline-none"
+            >
+              <span className="h-[1px] w-0 bg-primary group-hover:w-4 transition-all duration-300" />
+              <span>Contato</span>
+            </button>
+          </li>
+        </ul>
+      </div>
     </div>
 
-    <div className="border-t border-white/5 py-8">
-      <div className="max-w-7xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-6 font-medium">
-        <p className="text-xs text-slate-500">
-          © {new Date().getFullYear()} CATCH-UP TECH. Todos os direitos reservados.
-        </p>
-        <div className="flex gap-8 text-xs text-slate-500">
-          <Link href="/privacy-policy" className="hover:text-white transition-colors">Política de Privacidade</Link>
-          <Link href="/terms-of-use" className="hover:text-white transition-colors">Termos de Uso</Link>
+    <div className="border-t border-white/5 py-10">
+      <div className="max-w-7xl mx-auto px-6">
+        <div className="flex flex-col md:flex-row justify-between items-center gap-8 text-xs font-medium text-slate-500 tracking-wider">
+          <div className="flex items-center flex-wrap justify-center md:justify-start gap-1">
+            <span>Desenvolvido com ❤️ </span>
+            <Link
+              href="https://www.linkedin.com/company/catchup-tech"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="font-black text-slate-300 hover:text-primary transition-colors ml-1"
+            >
+              CatchUp Tech
+            </Link>
+            <span className="mx-3 opacity-20 hidden md:inline">|</span>
+            <span>&copy; {new Date().getFullYear()}</span>
+          </div>
+
+          <div className="flex gap-8">
+            <Link href="/privacy-policy" className="hover:text-white transition-colors">Privacidade</Link>
+            <Link href="/terms-of-use" className="hover:text-white transition-colors">Termos</Link>
+          </div>
         </div>
       </div>
     </div>
