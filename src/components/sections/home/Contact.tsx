@@ -44,7 +44,7 @@ export const Contact = () => {
     title: "Vamos tirar sua ideia do papel",
     description: "Conte um pouco sobre o seu projeto e entraremos em contato para entender melhor suas necessidades e como podemos ajudar.",
     email: "catchuptech@outlook.com",
-    phone: "+55 (53) 99999-9999",
+    phone: "+55 (19) 98234-1110",
   };
 
   const contactOptions = [
