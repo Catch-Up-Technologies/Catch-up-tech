@@ -24,7 +24,7 @@ export const SectionHeader = ({
       initial={{ opacity: 0, y: 20, x: isCenter ? 0 : -20 }}
       whileInView={{ opacity: 1, y: 0, x: 0 }}
       transition={{ duration: 0.8 }}
-      viewport={{ once: true }}
+      viewport={{ once: false }}
       className={`mb-12 ${isCenter ? "text-center" : "text-left"} ${className}`}
     >
       <h2 className={`title-section mb-6 ${light ? "!text-white" : ""}`}>

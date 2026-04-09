@@ -11,7 +11,7 @@ export const Contact = () => {
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
+          viewport={{ once: false }}
           className="p-8 lg:p-16 bg-slate-900 rounded-[2rem] text-center text-white relative overflow-hidden"
         >
           <div className="absolute top-0 right-0 w-64 h-64 bg-primary/20 blur-[100px] -mr-32 -mt-32" />

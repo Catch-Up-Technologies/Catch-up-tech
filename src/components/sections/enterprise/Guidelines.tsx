@@ -7,19 +7,18 @@ export const Guidelines = () => {
   return (
     <section className="py-32 bg-slate-50/50 overflow-hidden relative">
       <div className="max-w-7xl mx-auto px-6">
-        <SectionHeader 
-          title="Diretrizes Institucionais" 
+        <SectionHeader
+          title="Diretrizes Institucionais"
           align="center"
           className="mb-16"
         />
 
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-          {/* Missão */}
           <motion.div
             initial={{ opacity: 0, scale: 0.5 }}
             whileInView={{ opacity: 1, scale: 1 }}
-            viewport={{ once: true }}
-            transition={{ 
+            viewport={{ once: false }}
+            transition={{
               type: "spring",
               stiffness: 260,
               damping: 20,
@@ -40,7 +39,6 @@ export const Guidelines = () => {
             </Card>
           </motion.div>
 
-          {/* Valores */}
           <div className="lg:col-span-2 grid grid-cols-1 md:grid-cols-2 gap-6 h-full">
             {[
               { icon: Shield, title: "Excelência Técnica", desc: "Rigor no desenvolvimento de arquiteturas sólidas e manutenção de código de longo prazo." },
@@ -52,8 +50,8 @@ export const Guidelines = () => {
                 key={i}
                 initial={{ opacity: 0, scale: 0.5 }}
                 whileInView={{ opacity: 1, scale: 1 }}
-                viewport={{ once: true }}
-                transition={{ 
+                viewport={{ once: false }}
+                transition={{
                   type: "spring",
                   stiffness: 260,
                   damping: 20,
