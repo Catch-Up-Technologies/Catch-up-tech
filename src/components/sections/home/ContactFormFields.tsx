@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState, useEffect, useRef, useMemo } from "react";
-import { Mail, Phone, Send, Search, ChevronDown, Loader2 } from "lucide-react";
+import { Send, Search, ChevronDown, Loader2 } from "lucide-react";
 import { motion, AnimatePresence, Variants } from "framer-motion";
 import {
   getCountryCallingCode,

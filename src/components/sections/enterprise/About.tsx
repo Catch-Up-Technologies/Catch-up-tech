@@ -5,33 +5,14 @@ import { Cpu, Zap, Users } from "lucide-react";
 import { SectionHeader } from "@/components/ui/SectionHeader";
 
 export const About = () => {
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.1,
-      },
-    },
-  };
-
-  const itemVariants = {
-    hidden: { opacity: 0, y: 20 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: { duration: 0.6, ease: "easeOut" },
-    },
-  };
-
   return (
     <section id="about" className="py-32 bg-white overflow-hidden">
       <div className="max-w-7xl mx-auto px-6">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
-          <motion.div 
+          <motion.div
             initial={{ opacity: 0, x: -30 }}
             whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
+            viewport={{ once: false }}
             transition={{ duration: 0.8, ease: "easeOut" }}
             className="lg:pr-10"
           >
@@ -71,7 +52,7 @@ export const About = () => {
                 key={i}
                 initial={{ opacity: 0, x: 50 }}
                 whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true }}
+                viewport={{ once: false }}
                 transition={{ duration: 0.6, delay: i * 0.15 }}
                 className="group p-[2px] bg-slate-200 rounded-2xl shadow-sm transition-all duration-300 hover:bg-primary hover:shadow-md hover:-translate-y-1"
               >

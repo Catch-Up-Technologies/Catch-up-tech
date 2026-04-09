@@ -2,7 +2,6 @@
 
 import { Globe, Smartphone, Settings, Palette, Code, Sparkles } from "lucide-react";
 import { motion, Variants } from "framer-motion";
-import { Button } from "@/components/ui/Button";
 import { Card } from "@/components/ui/Card";
 import { SectionHeader } from "@/components/ui/SectionHeader";
 
@@ -68,7 +67,7 @@ export const Services = () => {
   return (
     <section id="services" className="section-padding overflow-hidden">
       <div className="max-w-7xl mx-auto">
-        <SectionHeader 
+        <SectionHeader
           title="Nossos Serviços"
           align="center"
           className="mb-24"

@@ -7,7 +7,8 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
-    "deploy": "next build && npx wrangler pages deploy ./out"
+    "deploy": "next build && npx wrangler pages deploy ./out",
+    "clean": "eslint . --fix"
   },
   "dependencies": {
     "@radix-ui/react-slot": "^1.2.4",
@@ -26,8 +27,10 @@
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
+    "@typescript-eslint/eslint-plugin": "^8.58.1",
     "eslint": "^9",
     "eslint-config-next": "16.2.2",
+    "eslint-plugin-unused-imports": "^4.4.1",
     "tailwindcss": "^4",
     "typescript": "^5"
   }
