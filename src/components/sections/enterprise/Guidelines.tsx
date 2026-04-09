@@ -5,7 +5,7 @@ import { SectionHeader } from "@/components/ui/SectionHeader";
 
 export const Guidelines = () => {
   return (
-    <section className="py-24 bg-slate-50/50 overflow-hidden relative">
+    <section className="py-32 bg-slate-50/50 overflow-hidden relative">
       <div className="max-w-7xl mx-auto px-6">
         <SectionHeader 
           title="Diretrizes Institucionais" 
@@ -16,9 +16,15 @@ export const Guidelines = () => {
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
           {/* Missão */}
           <motion.div
-            initial={{ opacity: 0, scale: 0.95 }}
+            initial={{ opacity: 0, scale: 0.5 }}
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true }}
+            transition={{ 
+              type: "spring",
+              stiffness: 260,
+              damping: 20,
+              duration: 0.6
+            }}
             className="lg:col-span-1"
           >
             <Card className="h-full border-primary/20 bg-primary/[0.02]">
@@ -35,21 +41,27 @@ export const Guidelines = () => {
           </motion.div>
 
           {/* Valores */}
-          <motion.div
-            initial={{ opacity: 0, scale: 0.95 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.2 }}
-            className="lg:col-span-2"
-          >
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 h-full">
-              {[
-                { icon: Shield, title: "Excelência Técnica", desc: "Rigor no desenvolvimento de arquiteturas sólidas e manutenção de código de longo prazo." },
-                { icon: Activity, title: "Agilidade Estratégica", desc: "Capacidade de resposta rápida às demandas de mercado com foco em entregas de valor." },
-                { icon: Gavel, title: "Governança e Ética", desc: "Transparência em todos os processos de gestão de dados e ciclos de desenvolvimento." },
-                { icon: TrendingUp, title: "Orientação a Resultados", desc: "Compromisso com métricas de sucesso que impactem diretamente a operação do cliente." },
-              ].map((valor, i) => (
-                <Card key={i} className="bg-white hover:shadow-xl transition-shadow duration-500">
+          <div className="lg:col-span-2 grid grid-cols-1 md:grid-cols-2 gap-6 h-full">
+            {[
+              { icon: Shield, title: "Excelência Técnica", desc: "Rigor no desenvolvimento de arquiteturas sólidas e manutenção de código de longo prazo." },
+              { icon: Activity, title: "Agilidade Estratégica", desc: "Capacidade de resposta rápida às demandas de mercado com foco em entregas de valor." },
+              { icon: Gavel, title: "Governança e Ética", desc: "Transparência em todos os processos de gestão de dados e ciclos de desenvolvimento." },
+              { icon: TrendingUp, title: "Orientação a Resultados", desc: "Compromisso com métricas de sucesso que impactem diretamente a operação do cliente." },
+            ].map((valor, i) => (
+              <motion.div
+                key={i}
+                initial={{ opacity: 0, scale: 0.5 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                viewport={{ once: true }}
+                transition={{ 
+                  type: "spring",
+                  stiffness: 260,
+                  damping: 20,
+                  duration: 0.6,
+                  delay: 0.1 + (i * 0.1)
+                }}
+              >
+                <Card className="bg-white hover:shadow-xl transition-shadow duration-500 h-full">
                   <div className="p-6">
                     <div className="flex gap-4 items-start">
                       <div className="p-2 bg-slate-50 rounded-lg text-primary">
@@ -62,9 +74,9 @@ export const Guidelines = () => {
                     </div>
                   </div>
                 </Card>
-              ))}
-            </div>
-          </motion.div>
+              </motion.div>
+            ))}
+          </div>
         </div>
       </div>
     </section>
