@@ -2,15 +2,17 @@
 
 import Image from "next/image";
 import { motion } from "framer-motion";
+import { Button } from "@/components/ui/Button";
+import Link from "next/link";
 
 export const Hero = () => {
   const content = {
-    title: "Transformamos ideias em soluções digitais escaláveis",
+    title: "Transformamos ideias em soluções digitais",
     desc: "Desenvolvemos aplicações sob medida com foco em performance, organização e evolução contínua, ajudando empresas a tirar projetos do papel e crescer com tecnologia.",
     btn: "Solicitar orçamento",
   };
   return (
-    <section className="relative overflow-hidden mesh-gradient min-h-[95vh] flex items-center">
+    <section id="home" className="relative overflow-hidden mesh-gradient min-h-[95vh] flex items-center">
       <div className="section-padding pt-32 lg:pt-40 flex flex-col lg:flex-row items-center gap-16 max-w-7xl mx-auto w-full relative z-10">
         <div className="flex-1 text-center lg:text-left space-y-8">
 
@@ -41,12 +43,11 @@ export const Hero = () => {
             transition={{ duration: 0.5, delay: 0.4 }}
             className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start pt-6"
           >
-            <a
-              href="#contact"
-              className="btn-primary group flex items-center gap-2 text-base no-underline"
-            >
-              {content.btn}
-            </a>
+            <Link href="#contact" className="no-underline">
+              <Button className="group flex items-center gap-2 text-base">
+                {content.btn}
+              </Button>
+            </Link>
           </motion.div>
         </div>
 
@@ -65,6 +66,7 @@ export const Hero = () => {
               fill
               className="object-cover"
               priority
+              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 50vw"
             />
           </div>
         </motion.div>

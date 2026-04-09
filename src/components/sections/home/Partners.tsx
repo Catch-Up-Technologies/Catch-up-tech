@@ -1,5 +1,6 @@
 "use client";
 
+import { SectionHeader } from "@/components/ui/SectionHeader";
 import { motion } from "framer-motion";
 import Link from "next/link";
 import { useState } from "react";
@@ -7,25 +8,17 @@ import { useState } from "react";
 export const Partners = () => {
   const content = {
     title: "Nossos Parceiros",
-    desc: "Trabalhamos com empresas que confiaram em nosso trabalho para construir soluções digitais eficientes e preparadas para crescer. \n Conheça mais sobre quem somos e como podemos ajudar no seu próximo projeto.",
+    desc: "Trabalhamos com empresas que confiaram em nosso trabalho para construir soluções digitais eficientes e preparadas para crescer.",
   };
 
   const partners = [
-    { name: "VTEX", desc: "Digital commerce enterprise", prominent: true },
-    { name: "Shopify", desc: "E-commerce global", prominent: true },
-    { name: "WooCommerce", desc: "Customização open-source", prominent: true },
-    { name: "Tray", desc: "Vendas multi-canal", prominent: true },
-    { name: "Vendizap", desc: "Automação via WhatsApp", prominent: true },
-    { name: "Nuvemshop", desc: "Líder na América Latina", prominent: true },
-    { name: "Linx", desc: "Sistemas para varejo", prominent: true },
-    { name: "Tray Corp", desc: "E-commerce larga escala", prominent: true },
-    { name: "AWS", desc: "Infraestrutura escalável", prominent: true },
-    { name: "Keitri", desc: "Consultoria de TI", prominent: true },
-    { name: "Loja Integrada", desc: "Vendas online ágeis", prominent: true },
-    { name: "Google Cloud", desc: "Poder de computação", prominent: true },
+    { name: "Petrobras", desc: "Setor de Energia e Óleo", prominent: true },
+    { name: "Unilab", desc: "Saúde e Hemocentro Animal", prominent: true },
+    { name: "DuAutomações", desc: "Automação e Segurança", prominent: true },
+    { name: "DrPet", desc: "Gestão de Centros Pet", prominent: true },
   ];
 
-  const duplicatedPartners = [...partners, ...partners];
+  const duplicatedPartners = [...partners, ...partners, ...partners, ...partners];
 
   const MarqueeRow = ({ items, direction = "left", speed = 40, className = "", pauseOnHover = false }: any) => {
     const [isPaused, setIsPaused] = useState(false);
@@ -79,34 +72,12 @@ export const Partners = () => {
 
   return (
     <section id="partners" className="bg-slate-50/50 w-full py-24 lg:py-32 overflow-hidden border-y border-slate-100 relative">
-      <div className="max-w-7xl mx-auto px-6 mb-24 text-center space-y-4">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-          className="space-y-4"
-        >
-          <h2 className="title-section">{content.title}</h2>
-          <div className="h-1.5 w-16 bg-primary mx-auto rounded-full" />
-        </motion.div>
-
-        <motion.p
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.1 }}
-          className="text-slate-500 max-w-xl mx-auto text-base lg:text-lg font-medium leading-relaxed opacity-80 whitespace-pre-line"
-        >
-          {content.desc}
-        </motion.p>
-
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.1 }}
-          className="flex justify-center"
-        >
-          <Link href="/about" className="btn-primary">Sobre nós</Link>
-        </motion.div>
+      <div className="max-w-7xl mx-auto px-6 mb-24 text-center">
+        <SectionHeader 
+          title={content.title}
+          description={content.desc}
+          align="center"
+        />
       </div>
 
       <div className="max-w-7xl mx-auto px-6 mb-8 lg:mb-12">

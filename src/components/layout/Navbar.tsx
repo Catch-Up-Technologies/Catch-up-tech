@@ -6,15 +6,14 @@ import { usePathname } from "next/navigation";
 import { Search, Menu, X, ChevronRight } from "lucide-react";
 import { navigation } from "@/config/navigation";
 
-export const SideBar = () => {
+export const Navbar = () => {
   const pathname = usePathname();
   const [activeSection, setActiveSection] = useState("home");
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const navRef = useRef<HTMLDivElement>(null);
 
-  // Monitorar seção ativa e cliques fora do menu
   useEffect(() => {
-    const sections = ["home", "servicos", "cases", "recursos", "empresa", "contact"];
+    const sections = ["home", "services", "cases", "resources", "company", "contact"];
 
     const observerOptions = {
       root: null,
@@ -54,14 +53,12 @@ export const SideBar = () => {
   const handleLinkClick = (item: any) => {
     setIsMobileMenuOpen(false);
 
-    // Se clicar em Início ou o href for a home e já estivermos na home
     if ((item.id === "home" || item.href === "/") && pathname === "/") {
       window.scrollTo({ top: 0, behavior: "smooth" });
       setActiveSection("home");
       return;
     }
 
-    // Smooth scroll para outras seções se estivermos na home
     if (item.href.startsWith("/#") && pathname === "/") {
       const id = item.href.replace("/#", "");
       const element = document.getElementById(id);
@@ -90,10 +87,15 @@ export const SideBar = () => {
       >
         <div className="flex flex-col items-center bg-white/85 backdrop-blur-2xl border border-white/50 rounded-full py-8 px-4 gap-8 shadow-[0_20px_50px_rgba(0,0,0,0.2)] ring-1 ring-black/5">
           {navigation.map((item) => {
-            const isPathActive = pathname === item.href || (item.href !== "/" && pathname.startsWith(item.href));
+            const isSubItemActive = item.subItems?.some(sub => {
+              const subPath = sub.href.split('#')[0];
+              return pathname === subPath || (subPath !== "/" && pathname.startsWith(subPath));
+            });
+
+            const isPathActive = pathname === item.href || (item.href !== "/" && pathname.startsWith(item.href)) || isSubItemActive;
             const isSectionActive = activeSection === item.id;
             const isActive = pathname === "/" ? isSectionActive : isPathActive;
-            
+
             const hasSubItems = item.subItems && item.subItems.length > 0;
 
             return (

@@ -2,6 +2,9 @@
 
 import { Globe, Smartphone, Settings, Palette, Code, Sparkles } from "lucide-react";
 import { motion, Variants } from "framer-motion";
+import { Button } from "@/components/ui/Button";
+import { Card } from "@/components/ui/Card";
+import { SectionHeader } from "@/components/ui/SectionHeader";
 
 export const Services = () => {
   const items = [
@@ -22,7 +25,7 @@ export const Services = () => {
     },
     {
       title: "APIs & Integrações",
-      desc: "Conectamos sistemas e serviços através de APIs robustas, automatizando processos e aumentando a produtividade.",
+      desc: "Conectamos sistemas e serviços através de APIs, automatizando processos e aumentando a produtividade.",
       icon: Settings,
     },
     {
@@ -65,21 +68,11 @@ export const Services = () => {
   return (
     <section id="services" className="section-padding overflow-hidden">
       <div className="max-w-7xl mx-auto">
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: false }}
-          transition={{ duration: 0.8, ease: "easeOut" }}
-          className="text-center mb-24 space-y-4"
-        >
-          <h2 className="title-section">Nossos Serviços</h2>
-          <motion.div
-            initial={{ width: 0, opacity: 0 }}
-            whileInView={{ width: "5rem", opacity: 1 }}
-            transition={{ delay: 0.3, duration: 1, ease: "backOut" }}
-            className="h-1.5 bg-primary mx-auto rounded-full"
-          />
-        </motion.div>
+        <SectionHeader 
+          title="Nossos Serviços"
+          align="center"
+          className="mb-24"
+        />
 
         <motion.div
           variants={containerVariants}
@@ -92,15 +85,16 @@ export const Services = () => {
             <motion.div
               key={i}
               variants={itemVariants}
-              className="card-premium group hover:-translate-y-2"
             >
-              <div className="w-14 h-14 rounded-2xl bg-secondary flex items-center justify-center text-white mb-10 group-hover:scale-110 transition-transform duration-500">
-                <item.icon className="w-6 h-6" />
-              </div>
-              <h3 className="text-xl font-bold text-secondary mb-4 tracking-tight leading-tight">{item.title}</h3>
-              <p className="text-body !text-base">
-                {item.desc}
-              </p>
+              <Card className="group hover:-translate-y-2 h-full">
+                <div className="w-14 h-14 rounded-2xl bg-secondary flex items-center justify-center text-white mb-10 group-hover:scale-110 transition-transform duration-500">
+                  <item.icon className="w-6 h-6" />
+                </div>
+                <h3 className="text-xl font-bold text-secondary mb-4 tracking-tight leading-tight">{item.title}</h3>
+                <p className="text-body !text-base">
+                  {item.desc}
+                </p>
+              </Card>
             </motion.div>
           ))}
         </motion.div>

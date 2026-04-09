@@ -1,7 +1,8 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { motion, useInView, Variants } from "framer-motion";
+import { motion, Variants } from "framer-motion";
+import { SectionHeader } from "@/components/ui/SectionHeader";
 
 export const Methodology = () => {
   const [isMobile, setIsMobile] = useState(false);
@@ -53,12 +54,12 @@ export const Methodology = () => {
   };
 
   const squareVariants: Variants = {
-    hidden: { 
-      scale: 0, 
-      rotate: -360, 
-      x: isMobile ? 0 : -100, 
-      y: isMobile ? -50 : 0, 
-      opacity: 0 
+    hidden: {
+      scale: 0,
+      rotate: -360,
+      x: isMobile ? 0 : -100,
+      y: isMobile ? -50 : 0,
+      opacity: 0
     },
     visible: {
       scale: 1,
@@ -85,31 +86,13 @@ export const Methodology = () => {
       <div className="absolute bottom-0 left-0 w-[40rem] h-[40rem] bg-primary/5 blur-[120px] translate-y-1/2 -translate-x-1/2 pointer-events-none" />
 
       <div className="max-w-7xl mx-auto relative z-10 px-6 w-full">
-        <div className="text-center mb-24 space-y-6">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: false }}
-            transition={{ duration: 0.8 }}
-          >
-            <h2 className="title-section !text-white !text-4xl lg:!text-6xl mb-4">{content.title}</h2>
-            <motion.div
-              initial={{ width: 0, opacity: 0 }}
-              whileInView={{ width: "8rem", opacity: 1 }}
-              transition={{ delay: 0.4, duration: 1, ease: "backOut" }}
-              className="h-2 bg-primary mx-auto rounded-full"
-            />
-          </motion.div>
-          <motion.p
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            viewport={{ once: false }}
-            transition={{ delay: 0.2, duration: 1 }}
-            className="text-zinc-400 max-w-2xl mx-auto text-lg leading-relaxed font-medium"
-          >
-            {content.desc}
-          </motion.p>
-        </div>
+        <SectionHeader
+          title={content.title}
+          description={content.desc}
+          align="center"
+          light={true}
+          className="mb-24"
+        />
 
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-12 lg:gap-20 relative">
           {steps.map((step, i) => (
@@ -124,24 +107,24 @@ export const Methodology = () => {
             >
               <motion.div
                 variants={{
-                  hidden: { 
-                    opacity: 0, 
-                    x: isMobile ? 0 : -50, 
-                    y: isMobile ? -30 : 0 
+                  hidden: {
+                    opacity: 0,
+                    x: isMobile ? 0 : -50,
+                    y: isMobile ? -30 : 0
                   },
-                  visible: { 
-                    opacity: 1, 
-                    x: 0, 
+                  visible: {
+                    opacity: 1,
+                    x: 0,
                     y: 0,
-                    transition: { duration: 0.8 } 
+                    transition: { duration: 0.8 }
                   }
                 }}
-                animate={{ 
+                animate={{
                   y: [0, -10, 0],
-                  transition: { 
-                    duration: 6, 
-                    repeat: Infinity, 
-                    ease: "easeInOut" 
+                  transition: {
+                    duration: 6,
+                    repeat: Infinity,
+                    ease: "easeInOut"
                   }
                 }}
                 className="text-[10rem] font-black text-white/[0.03] absolute -top-24 left-1/2 lg:left-0 -translate-x-1/2 lg:translate-x-0 select-none pointer-events-none group-hover:text-primary/10 transition-colors duration-700"
@@ -155,9 +138,9 @@ export const Methodology = () => {
                     <motion.div
                       variants={{
                         hidden: { width: 0 },
-                        visible: { 
-                          width: "100%", 
-                          transition: { delay: 1 + i * 0.2, duration: 1.5, ease: "easeInOut" } 
+                        visible: {
+                          width: "100%",
+                          transition: { delay: 1 + i * 0.2, duration: 1.5, ease: "easeInOut" }
                         }
                       }}
                       className="h-full bg-gradient-to-r from-primary to-transparent opacity-30"
@@ -182,10 +165,10 @@ export const Methodology = () => {
               <motion.div
                 variants={{
                   hidden: { opacity: 0, y: 20 },
-                  visible: { 
-                    opacity: 1, 
-                    y: 0, 
-                    transition: { duration: 0.8 } 
+                  visible: {
+                    opacity: 1,
+                    y: 0,
+                    transition: { duration: 0.8 }
                   }
                 }}
                 className="relative z-10 space-y-4"

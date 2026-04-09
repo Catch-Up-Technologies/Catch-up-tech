@@ -11,6 +11,8 @@
   --border: #e2e8f0;
   --radius-lg: 1rem;
   --radius-xl: 2.5rem;
+  --slate-soft: rgba(248, 250, 252, 0.5);
+  --deep-blue: #020617;
 }
 
 @theme inline {
@@ -21,6 +23,8 @@
   --color-accent: var(--accent);
   --color-muted: var(--muted);
   --color-border: var(--border);
+  --color-slate-soft: var(--slate-soft);
+  --color-deep-blue: var(--deep-blue);
   --font-sans: "Inter", var(--font-geist-sans);
   
   --shadow-premium: 0 20px 25px -5px rgb(0 0 0 / 0.05), 0 8px 10px -6px rgb(0 0 0 / 0.05);
