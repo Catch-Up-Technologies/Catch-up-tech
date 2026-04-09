@@ -1,0 +1,10 @@
+name = "catch-up-tech"
+pages_build_output_dir = "./out"
+
+# Configurações para Cloudflare Pages
+[vars]
+# Adicione variáveis de ambiente aqui se necessário
+
+[[plugins]]
+# Exemplo: [[plugins]]
+# name = "next-on-pages"
