@@ -1,10 +1,11 @@
+# Configuração recomendada para Cloudflare Pages
 name = "catch-up-tech"
+
+# Diretório onde o Next.js gera os arquivos estáticos
 pages_build_output_dir = "./out"
 
-# Configurações para Cloudflare Pages
 [vars]
-# Adicione variáveis de ambiente aqui se necessário
+# Variáveis de ambiente podem ser colocadas aqui
 
-[[plugins]]
-# Exemplo: [[plugins]]
-# name = "next-on-pages"
+# Nota: Para sites Next.js estáticos no Cloudflare Pages,
+# a maioria das configurações é feita automaticamente no dashboard.
