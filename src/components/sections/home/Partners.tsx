@@ -2,7 +2,6 @@
 
 import { SectionHeader } from "@/components/ui/SectionHeader";
 import { motion } from "framer-motion";
-import Link from "next/link";
 import { useState } from "react";
 
 export const Partners = () => {
@@ -12,10 +11,10 @@ export const Partners = () => {
   };
 
   const partners = [
-    { name: "Petrobras", desc: "Setor de Energia e Óleo", prominent: true },
+    { name: "CalibraFlow", desc: "Setor de Energia e Óleo", prominent: true },
     { name: "Unilab", desc: "Saúde e Hemocentro Animal", prominent: true },
     { name: "DuAutomações", desc: "Automação e Segurança", prominent: true },
-    { name: "DrPet", desc: "Gestão de Centros Pet", prominent: true },
+    { name: "DrPet", desc: "Gestão de Centros Pet", prominent: true }
   ];
 
   const duplicatedPartners = [...partners, ...partners, ...partners, ...partners];
@@ -71,9 +70,9 @@ export const Partners = () => {
   };
 
   return (
-    <section id="partners" className="bg-slate-50/50 w-full py-24 lg:py-32 overflow-hidden border-y border-slate-100 relative">
+    <section id="partners" className="bg-slate-50/50 w-full py-32 overflow-hidden border-y border-slate-100 relative">
       <div className="max-w-7xl mx-auto px-6 mb-24 text-center">
-        <SectionHeader 
+        <SectionHeader
           title={content.title}
           description={content.desc}
           align="center"
