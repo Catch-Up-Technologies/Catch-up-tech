@@ -84,7 +84,7 @@ export const Partners = () => {
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 0.4 }}
           transition={{ duration: 1 }}
-          className="text-[10px] lg:text-xs font-black uppercase tracking-[0.3em] text-center text-slate-500"
+          className="text-[10px] lg:text-xs font-black uppercase tracking-[0.3em] text-center text-slate-500 animate-bounce"
         >
           Empresas que já confiaram no nosso trabalho
         </motion.p>
