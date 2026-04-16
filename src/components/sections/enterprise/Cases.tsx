@@ -122,7 +122,7 @@ export const Cases = () => {
   ];
 
   return (
-    <section id="cases" className="bg-secondary w-full relative overflow-hidden">
+    <section id="cases" className="bg-secondary w-full relative">
       <div className="h-screen w-full flex items-center justify-center bg-secondary relative z-20">
         <div className="max-w-7xl mx-auto px-6 text-center">
           <SectionHeader
