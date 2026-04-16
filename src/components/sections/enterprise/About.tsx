@@ -6,8 +6,11 @@ import { SectionHeader } from "@/components/ui/SectionHeader";
 
 export const About = () => {
   return (
-    <section id="about" className="py-32 bg-white overflow-hidden">
-      <div className="max-w-7xl mx-auto px-6">
+    <section id="about" className="py-32 bg-background overflow-hidden relative">
+      {/* Background Texture */}
+      <div className="absolute inset-0 bg-[radial-gradient(var(--dot-pattern)_1px,transparent_1px)] [background-size:24px_24px]" />
+
+      <div className="max-w-7xl mx-auto px-6 relative z-10">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
           <motion.div
             initial={{ opacity: 0, x: -30 }}
@@ -20,7 +23,7 @@ export const About = () => {
               title="Sobre a CatchUp Tech"
               className="mb-8"
             />
-            <div className="space-y-6 text-slate-600 leading-relaxed">
+            <div className="space-y-6 text-muted leading-relaxed">
               <p>
                 A CatchUp Tech é uma organização de desenvolvimento de software dedicada a converter complexidades operacionais em vantagem competitiva sustentável. Especializada na criação de arquiteturas sob medida e na automação de processos críticos, entregamos soluções escaláveis projetadas para suportar o crescimento e a eficiência de nossos parceiros de negócios.
               </p>
@@ -54,16 +57,16 @@ export const About = () => {
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: false }}
                 transition={{ duration: 0.6, delay: i * 0.15 }}
-                className="group p-[2px] bg-slate-200 rounded-2xl shadow-sm transition-all duration-300 hover:bg-primary hover:shadow-md hover:-translate-y-1"
+                className="group p-[2px] bg-border rounded-2xl shadow-sm transition-all duration-300 hover:bg-primary hover:shadow-md hover:-translate-y-1"
               >
-                <div className="p-6 bg-white rounded-[14px] h-full">
+                <div className="p-6 bg-card-pure rounded-[14px] h-full">
                   <div className="flex gap-5 items-start">
-                    <div className="p-3 bg-slate-50 rounded-xl text-primary transition-all duration-300 group-hover:bg-primary group-hover:text-white shrink-0">
+                    <div className="p-3 bg-card-muted rounded-xl text-primary transition-all duration-300 group-hover:bg-primary group-hover:text-white shrink-0">
                       <item.icon size={26} />
                     </div>
                     <div>
-                      <h3 className="font-bold text-slate-900 mb-1 text-lg">{item.title}</h3>
-                      <p className="text-sm text-slate-500 leading-relaxed">{item.desc}</p>
+                      <h3 className="font-bold text-foreground mb-1 text-lg">{item.title}</h3>
+                      <p className="text-sm text-muted leading-relaxed">{item.desc}</p>
                     </div>
                   </div>
                 </div>

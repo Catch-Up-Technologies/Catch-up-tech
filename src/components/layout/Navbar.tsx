@@ -5,6 +5,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Menu, X, ChevronRight } from "lucide-react";
 import { navigation } from "@/config/navigation";
+import { ThemeToggle } from "@/components/ui/ThemeToggle";
 
 export const Navbar = () => {
   const pathname = usePathname();
@@ -50,7 +51,7 @@ export const Navbar = () => {
     };
   }, []);
 
-  const handleLinkClick = (item: any) => {
+  const handleLinkClick = (item: { id?: string; href: string }) => {
     setIsMobileMenuOpen(false);
 
     if ((item.id === "home" || item.href === "/") && pathname === "/") {
@@ -64,7 +65,7 @@ export const Navbar = () => {
       const element = document.getElementById(id);
       if (element) {
         element.scrollIntoView({ behavior: "smooth" });
-        setActiveSection(item.id);
+        if (item.id) setActiveSection(item.id);
       }
     }
   };
@@ -73,7 +74,7 @@ export const Navbar = () => {
     <>
       <button
         onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-        className="fixed left-6 top-6 z-[110] lg:hidden w-12 h-12 rounded-full bg-white/80 backdrop-blur-xl border border-white/40 shadow-xl flex items-center justify-center text-secondary hover:scale-110 active:scale-95 transition-all"
+        className="fixed left-6 top-6 z-[110] lg:hidden w-12 h-12 rounded-full bg-background/80 backdrop-blur-xl border border-border/40 shadow-xl flex items-center justify-center text-secondary hover:scale-110 active:scale-95 transition-all"
         aria-label="Toggle Menu"
       >
         {isMobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
@@ -85,7 +86,7 @@ export const Navbar = () => {
           ${isMobileMenuOpen ? "translate-x-0 opacity-100" : "-translate-x-[200%] lg:translate-x-0 opacity-0 lg:opacity-100"}
         `}
       >
-        <div className="flex flex-col items-center bg-white/85 backdrop-blur-2xl border border-white/50 rounded-full py-8 px-4 gap-8 shadow-[0_20px_50px_rgba(0,0,0,0.2)] ring-1 ring-black/5">
+        <div className="flex flex-col items-center bg-background/85 backdrop-blur-2xl border border-border/40 rounded-full py-8 px-4 gap-8 shadow-[0_20px_50px_rgba(0,0,0,0.2)] ring-1 ring-black/5">
           {navigation.map((item) => {
             const isSubItemActive = item.subItems?.some(sub => {
               const subPath = sub.href.split('#')[0];
@@ -111,7 +112,7 @@ export const Navbar = () => {
 
                   <div className="relative">
                     <item.icon
-                      className={`w-5 h-5 transition-colors duration-300 ${isActive ? "text-primary" : "text-slate-600 group-hover:text-secondary"
+                      className={`w-5 h-5 transition-colors duration-300 ${isActive ? "text-primary" : "text-muted group-hover:text-secondary"
                         }`}
                     />
                     {hasSubItems && (
@@ -129,7 +130,7 @@ export const Navbar = () => {
 
                 {hasSubItems && (
                   <div className="absolute left-full ml-2 opacity-0 invisible group-hover:opacity-100 group-hover:visible translate-x-[-10px] group-hover:translate-x-0 transition-all duration-300 pointer-events-none group-hover:pointer-events-auto z-[120]">
-                    <div className="flex flex-col gap-4 bg-white/95 backdrop-blur-3xl border border-white/60 rounded-[2rem] p-6 shadow-[0_30px_70px_rgba(0,0,0,0.15)] min-w-[200px]">
+                    <div className="flex flex-col gap-4 bg-background/95 backdrop-blur-3xl border border-border/60 rounded-[2rem] p-6 shadow-[0_30px_70px_rgba(0,0,0,0.15)] min-w-[200px]">
                       <p className="text-[10px] font-bold text-primary uppercase tracking-[0.1em] mb-2 opacity-60">
                         {item.label}
                       </p>
@@ -150,6 +151,10 @@ export const Navbar = () => {
               </div>
             );
           })}
+          
+          <div className="pt-4 mt-4 border-t border-border/20 w-full flex justify-center">
+            <ThemeToggle />
+          </div>
         </div>
       </nav>
 

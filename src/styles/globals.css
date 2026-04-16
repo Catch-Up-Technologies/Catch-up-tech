@@ -1,18 +1,55 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #0f172a;
-  --primary: #2563eb;
-  --primary-glow: rgba(37, 99, 235, 0.15);
-  --secondary: #1e293b;
-  --accent: #0a0f1a;
-  --muted: #64748b;
-  --border: #e2e8f0;
+  --background: #fafafa;
+  --foreground: #171717;
+  --primary: #00a091;
+  --primary-glow: rgba(0, 160, 145, 0.15);
+  --secondary: #002648;
+  --accent: #2571b8;
+  --muted: #6b7280;
+  --border: #e5e7eb;
   --radius-lg: 1rem;
   --radius-xl: 2.5rem;
-  --slate-soft: rgba(248, 250, 252, 0.5);
+  --slate-soft: rgba(243, 244, 246, 0.5);
+  --deep-blue: #002648;
+
+  /* Status Colors */
+  --status-success: #15803d;
+  --status-warning: #ea580c;
+  --status-error: #b91c1c;
+
+  /* Card Semantic Shades */
+  --bg-card-soft: #f9fafb;
+  --bg-card-pure: #fafafa;
+  --bg-card-muted: #f3f4f6;
+  --dot-pattern: rgba(0, 38, 72, 0.1);
+}
+
+.dark {
+  --background: #0f172a;
+  --foreground: #f9fafb;
+  --primary: #00a091;
+  --primary-glow: rgba(0, 160, 145, 0.2);
+  --secondary: #002648;
+  --accent: #2571b8;
+  --muted: #9ca3af;
+  --border: #374151;
+  --radius-lg: 1rem;
+  --radius-xl: 2.5rem;
+  --slate-soft: rgba(31, 41, 55, 0.5);
   --deep-blue: #020617;
+
+  /* Status Colors */
+  --status-success: #22c55e;
+  --status-warning: #f97316;
+  --status-error: #ef4444;
+
+  /* Card Semantic Shades from palette */
+  --bg-card-soft: #404040;
+  --bg-card-pure: #1f2937;
+  --bg-card-muted: #042f2e;
+  --dot-pattern: rgba(255, 255, 255, 0.05);
 }
 
 @theme inline {
@@ -25,6 +62,16 @@
   --color-border: var(--border);
   --color-slate-soft: var(--slate-soft);
   --color-deep-blue: var(--deep-blue);
+  
+  --color-success: var(--status-success);
+  --color-warning: var(--status-warning);
+  --color-error: var(--status-error);
+  
+  --color-card-soft: var(--bg-card-soft);
+  --color-card-pure: var(--bg-card-pure);
+  --color-card-muted: var(--bg-card-muted);
+  --color-dot-pattern: var(--dot-pattern);
+
   --font-sans: "Inter", var(--font-geist-sans);
   
   --shadow-premium: 0 20px 25px -5px rgb(0 0 0 / 0.05), 0 8px 10px -6px rgb(0 0 0 / 0.05);
@@ -75,17 +122,17 @@ body {
 
 /* --- Card Premium --- */
 .card-premium {
-  @apply p-10 rounded-[2.5rem] border border-slate-100 bg-white shadow-premium 
+  @apply p-10 rounded-[2.5rem] border border-border bg-card-pure shadow-premium 
          transition-all duration-500 hover:shadow-2xl hover:border-primary/10;
 }
 
 /* --- Tipografia --- */
 .title-main {
-  @apply text-4xl lg:text-5xl font-black text-secondary leading-[1.1] tracking-tighter uppercase italic;
+  @apply text-4xl lg:text-5xl font-black text-foreground leading-[1.1] tracking-tighter uppercase italic;
 }
 
 .title-section {
-  @apply text-3xl lg:text-5xl font-black text-secondary tracking-tight uppercase;
+  @apply text-3xl lg:text-5xl font-black text-foreground tracking-tight uppercase;
 }
 
 .text-body {
@@ -99,9 +146,9 @@ body {
 /* --- Efeitos --- */
 .mesh-gradient {
   background-image: 
-    radial-gradient(at 0% 0%, rgba(37, 99, 235, 0.03) 0, transparent 50%),
-    radial-gradient(at 50% 0%, rgba(30, 41, 59, 0.02) 0, transparent 50%),
-    radial-gradient(at 100% 0%, rgba(37, 99, 235, 0.03) 0, transparent 50%);
+    radial-gradient(at 0% 0%, rgba(0, 160, 145, 0.03) 0, transparent 50%),
+    radial-gradient(at 50% 0%, rgba(0, 38, 72, 0.02) 0, transparent 50%),
+    radial-gradient(at 100% 0%, rgba(0, 160, 145, 0.03) 0, transparent 50%);
 }
 
 .text-gradient {

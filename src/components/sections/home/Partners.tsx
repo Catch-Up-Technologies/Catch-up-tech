@@ -4,6 +4,20 @@ import { SectionHeader } from "@/components/ui/SectionHeader";
 import { motion } from "framer-motion";
 import { useState } from "react";
 
+interface PartnerItem {
+  name: string;
+  desc: string;
+  prominent: boolean;
+}
+
+interface MarqueeRowProps {
+  items: PartnerItem[];
+  direction?: "left" | "right";
+  speed?: number;
+  className?: string;
+  pauseOnHover?: boolean;
+}
+
 export const Partners = () => {
   const content = {
     title: "Nossos Parceiros",
@@ -17,9 +31,15 @@ export const Partners = () => {
     { name: "DrPet", desc: "Gestão de Centros Pet", prominent: true }
   ];
 
-  const duplicatedPartners = [...partners, ...partners, ...partners, ...partners];
+  const duplicatedPartners: PartnerItem[] = [...partners, ...partners, ...partners, ...partners];
 
-  const MarqueeRow = ({ items, direction = "left", speed = 40, className = "", pauseOnHover = false }: any) => {
+  const MarqueeRow = ({ 
+    items, 
+    direction = "left", 
+    speed = 40, 
+    className = "", 
+    pauseOnHover = false 
+  }: MarqueeRowProps) => {
     const [isPaused, setIsPaused] = useState(false);
 
     return (
@@ -37,7 +57,7 @@ export const Partners = () => {
             ease: "linear",
           }}
         >
-          {items.map((item: any, i: number) => (
+          {items.map((item, i) => (
             <div
               key={i}
               className={`
@@ -48,7 +68,7 @@ export const Partners = () => {
             >
               <span className={`
                 font-black tracking-tighter uppercase transition-colors duration-300
-                ${item.prominent ? "text-slate-500" : "text-slate-400"}
+                ${item.prominent ? "text-muted" : "text-muted/60"}
                 group-hover:text-primary
                 text-2xl lg:text-4xl
               `}>
@@ -70,7 +90,7 @@ export const Partners = () => {
   };
 
   return (
-    <section id="partners" className="bg-slate-50/50 w-full py-32 overflow-hidden border-y border-slate-100 relative">
+    <section id="partners" className="bg-card-muted/30 w-full py-32 overflow-hidden border-y border-border relative">
       <div className="max-w-7xl mx-auto px-6 mb-24 text-center">
         <SectionHeader
           title={content.title}
@@ -84,21 +104,21 @@ export const Partners = () => {
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 0.4 }}
           transition={{ duration: 1 }}
-          className="text-[10px] lg:text-xs font-black uppercase tracking-[0.3em] text-center text-slate-500 animate-bounce"
+          className="text-[10px] lg:text-xs font-black uppercase tracking-[0.3em] text-center text-muted animate-bounce"
         >
           Empresas que já confiaram no nosso trabalho
         </motion.p>
       </div>
 
       <div className="relative space-y-4 lg:space-y-12">
-        <div className="absolute left-0 top-0 bottom-0 w-24 lg:w-48 bg-gradient-to-r from-slate-50 to-transparent z-10 pointer-events-none" />
-        <div className="absolute right-0 top-0 bottom-0 w-24 lg:w-48 bg-gradient-to-l from-slate-50 to-transparent z-10 pointer-events-none" />
+        <div className="absolute left-0 top-0 bottom-0 w-24 lg:w-48 bg-gradient-to-r from-background to-transparent z-10 pointer-events-none" />
+        <div className="absolute right-0 top-0 bottom-0 w-24 lg:w-48 bg-gradient-to-l from-background to-transparent z-10 pointer-events-none" />
 
         <MarqueeRow
           items={duplicatedPartners}
           direction="right"
           speed={60}
-          className="text-slate-300 font-black text-sm lg:text-xl opacity-10"
+          className="text-muted font-black text-sm lg:text-xl opacity-10"
         />
 
         <MarqueeRow
@@ -113,7 +133,7 @@ export const Partners = () => {
           items={duplicatedPartners}
           direction="right"
           speed={60}
-          className="text-slate-300 font-black text-sm lg:text-xl opacity-10"
+          className="text-muted font-black text-sm lg:text-xl opacity-10"
         />
       </div>
     </section>

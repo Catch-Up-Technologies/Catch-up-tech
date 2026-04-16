@@ -10,7 +10,7 @@ interface CardProps extends React.HTMLAttributes<HTMLDivElement> {
 export const Card = ({ className, variant = "premium", children, ...props }: CardProps) => {
   const variants = {
     premium: "card-premium",
-    simple: "p-6 rounded-2xl border border-slate-100 bg-white",
+    simple: "p-6 rounded-2xl border border-border bg-card-pure",
   };
 
   return (

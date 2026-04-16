@@ -65,8 +65,11 @@ export const Services = () => {
   };
 
   return (
-    <section id="services" className="section-padding overflow-hidden">
-      <div className="max-w-7xl mx-auto">
+    <section id="services" className="section-padding overflow-hidden relative">
+      {/* Background Texture */}
+      <div className="absolute inset-0 bg-[radial-gradient(var(--dot-pattern)_1px,transparent_1px)] [background-size:24px_24px]" />
+
+      <div className="max-w-7xl mx-auto relative z-10">
         <SectionHeader
           title="Nossos Serviços"
           align="center"
@@ -89,7 +92,7 @@ export const Services = () => {
                 <div className="w-14 h-14 rounded-2xl bg-secondary flex items-center justify-center text-white mb-10 group-hover:scale-110 transition-transform duration-500">
                   <item.icon className="w-6 h-6" />
                 </div>
-                <h3 className="text-xl font-bold text-secondary mb-4 tracking-tight leading-tight">{item.title}</h3>
+                <h3 className="text-xl font-bold text-foreground mb-4 tracking-tight leading-tight">{item.title}</h3>
                 <p className="text-body !text-base">
                   {item.desc}
                 </p>

@@ -5,7 +5,7 @@ import { Contact } from "@/components/sections/home/Contact";
 
 export default function Home() {
   return (
-    <main className="min-h-screen bg-white">
+    <main className="min-h-screen bg-background">
       <Hero />
       <Services />
       <Methodology />

@@ -5,7 +5,16 @@ import { ArrowUpRight, CheckCircle2 } from "lucide-react";
 import { useRef } from "react";
 import { SectionHeader } from "@/components/ui/SectionHeader";
 
-const CaseItem = ({ item, index }: { item: any; index: number; total: number }) => {
+interface Case {
+  company: string;
+  title: string;
+  metric: string;
+  metricDesc: string;
+  description: string;
+  tags: string[];
+}
+
+const CaseItem = ({ item }: { item: Case }) => {
   const containerRef = useRef(null);
   const { scrollYProgress } = useScroll({
     target: containerRef,
@@ -21,7 +30,7 @@ const CaseItem = ({ item, index }: { item: any; index: number; total: number }) 
     >
       <motion.div
         style={{ scale }}
-        className="max-w-5xl w-full bg-white rounded-[2rem] lg:rounded-[3rem] shadow-2xl p-8 lg:p-12 relative z-10 grid grid-cols-1 lg:grid-cols-[1.2fr_0.8fr] gap-10 lg:gap-16 items-center overflow-hidden"
+        className="max-w-5xl w-full bg-card-pure rounded-[2rem] lg:rounded-[3rem] shadow-2xl p-8 lg:p-12 relative z-10 grid grid-cols-1 lg:grid-cols-[1.2fr_0.8fr] gap-10 lg:gap-16 items-center overflow-hidden"
       >
         <div className={`absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-blue-700 to-transparent opacity-20 blur-2xl -translate-y-1/2 translate-x-1/2`} />
 
@@ -31,7 +40,7 @@ const CaseItem = ({ item, index }: { item: any; index: number; total: number }) 
           </div>
 
           <div className="space-y-2">
-            <h3 className="text-slate-900 text-3xl lg:text-5xl font-black tracking-tight leading-tight uppercase italic">
+            <h3 className="text-foreground text-3xl lg:text-5xl font-black tracking-tight leading-tight uppercase italic">
               {item.company}
             </h3>
             <p className="text-primary text-lg lg:text-2xl font-bold italic">
@@ -39,13 +48,13 @@ const CaseItem = ({ item, index }: { item: any; index: number; total: number }) 
             </p>
           </div>
 
-          <p className="text-slate-500 text-base lg:text-lg leading-relaxed max-w-lg font-medium">
+          <p className="text-muted text-base lg:text-lg leading-relaxed max-w-lg font-medium">
             {item.description}
           </p>
 
           <div className="flex flex-wrap gap-2">
             {item.tags.map((tag: string, i: number) => (
-              <span key={i} className="flex items-center gap-2 text-[9px] font-bold text-slate-400 uppercase tracking-widest bg-slate-50 px-3 py-1.5 rounded-lg border border-slate-100">
+              <span key={i} className="flex items-center gap-2 text-[9px] font-bold text-muted uppercase tracking-widest bg-card-muted px-3 py-1.5 rounded-lg border border-border">
                 <CheckCircle2 size={10} className="text-primary" />
                 {tag}
               </span>
@@ -54,17 +63,17 @@ const CaseItem = ({ item, index }: { item: any; index: number; total: number }) 
         </div>
 
         <div className="relative lg:ml-auto w-full">
-          <div className="relative p-0.5 bg-gradient-to-br from-slate-100 to-transparent rounded-[2rem] lg:rounded-[2.5rem] shadow-lg overflow-hidden group">
-            <div className="bg-slate-50 p-8 lg:p-12 rounded-[1.8rem] lg:rounded-[2.3rem] border border-slate-200">
+          <div className="relative p-0.5 bg-gradient-to-br from-border to-transparent rounded-[2rem] lg:rounded-[2.5rem] shadow-lg overflow-hidden group">
+            <div className="bg-card-muted p-8 lg:p-12 rounded-[1.8rem] lg:rounded-[2.3rem] border border-border">
               <div className="absolute top-0 right-0 p-6">
-                <ArrowUpRight size={24} className="text-slate-200 group-hover:text-primary transition-all duration-500" />
+                <ArrowUpRight size={24} className="text-muted/40 group-hover:text-primary transition-all duration-500" />
               </div>
 
               <div className="text-center space-y-1">
-                <span className="text-slate-900 text-6xl lg:text-8xl font-black tracking-tighter block leading-none">
+                <span className="text-foreground text-6xl lg:text-8xl font-black tracking-tighter block leading-none">
                   {item.metric}
                 </span>
-                <p className="text-slate-400 font-bold uppercase tracking-[0.3em] text-[9px] lg:text-xs">
+                <p className="text-muted font-bold uppercase tracking-[0.3em] text-[9px] lg:text-xs">
                   {item.metricDesc}
                 </p>
               </div>
@@ -77,7 +86,7 @@ const CaseItem = ({ item, index }: { item: any; index: number; total: number }) 
 };
 
 export const Cases = () => {
-  const cases = [
+  const cases: Case[] = [
     {
       company: "CalibraFlow",
       title: "Auditoria ISO para Petrobras",
@@ -113,7 +122,7 @@ export const Cases = () => {
   ];
 
   return (
-    <section id="cases" className="bg-secondary w-full relative">
+    <section id="cases" className="bg-secondary w-full relative overflow-hidden">
       <div className="h-screen w-full flex items-center justify-center bg-secondary relative z-20">
         <div className="max-w-7xl mx-auto px-6 text-center">
           <SectionHeader
@@ -137,8 +146,6 @@ export const Cases = () => {
           <CaseItem
             key={index}
             item={projeto}
-            index={index}
-            total={cases.length}
           />
         ))}
       </div>

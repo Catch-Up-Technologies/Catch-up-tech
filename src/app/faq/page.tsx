@@ -73,7 +73,7 @@ export default function FAQPage() {
   };
 
   return (
-    <main className="min-h-screen bg-white">
+    <main className="min-h-screen bg-background">
       <div className="bg-secondary border-b border-white/5 py-20 lg:py-32">
         <div className="max-w-4xl mx-auto px-6">
           <motion.h1
@@ -88,7 +88,7 @@ export default function FAQPage() {
             initial={{ opacity: 0, x: -20 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ delay: 0.1 }}
-            className="text-xl text-slate-300 leading-relaxed font-medium max-w-2xl"
+            className="text-xl text-muted leading-relaxed font-medium max-w-2xl"
           >
             Construa uma arquitetura digital sob medida para seu negócio, com engenharia de precisão e foco em resultados.
           </motion.p>
@@ -104,7 +104,7 @@ export default function FAQPage() {
                 key={index}
                 className={cn(
                   "group transition-all duration-300 rounded-2xl border border-transparent cursor-pointer",
-                  isExpanded ? "bg-slate-50/50 border-slate-100" : "hover:bg-slate-50/30"
+                  isExpanded ? "bg-card-muted/50 border-border" : "hover:bg-card-muted/30"
                 )}
               >
                 <button
@@ -113,13 +113,13 @@ export default function FAQPage() {
                 >
                   <h2 className={cn(
                     "text-xl lg:text-2xl font-bold tracking-tight uppercase px-0 border-none transition-all",
-                    isExpanded ? "text-primary" : "text-secondary group-hover:text-primary"
+                    isExpanded ? "text-primary" : "text-foreground group-hover:text-primary"
                   )}>
                     {faq.q}
                   </h2>
                   <div className={cn(
                     "mt-1 lg:mt-2 shrink-0 transition-transform duration-500",
-                    isExpanded ? "rotate-180 text-primary" : "text-slate-300 group-hover:text-primary"
+                    isExpanded ? "rotate-180 text-primary" : "text-muted/50 group-hover:text-primary"
                   )}>
                     <ChevronDown className="w-6 h-6" />
                   </div>
@@ -136,7 +136,7 @@ export default function FAQPage() {
                     >
                       <div className="px-6 pb-8 lg:px-8 lg:pb-10 pt-0">
                         <div className="prose prose-slate max-w-none">
-                          <p className="text-muted text-lg leading-relaxed font-medium">
+                          <p className="text-foreground/80 text-lg leading-relaxed font-medium">
                             {faq.a}
                           </p>
                         </div>
@@ -146,20 +146,20 @@ export default function FAQPage() {
                 </AnimatePresence>
 
                 {index < faqs.length - 1 && !isExpanded && (
-                  <div className="mx-6 lg:mx-8 h-px bg-slate-100" />
+                  <div className="mx-6 lg:mx-8 h-px bg-border/50" />
                 )}
               </div>
             );
           })}
         </div>
 
-        <div className="mt-24 pt-16 border-t border-slate-100">
+        <div className="mt-24 pt-16 border-t border-border">
           <div className="max-w-2xl mx-auto space-y-12">
             <div className="text-center space-y-4">
-              <h2 className="text-3xl lg:text-4xl font-black text-secondary uppercase tracking-tight">
+              <h2 className="text-3xl lg:text-4xl font-black text-foreground uppercase tracking-tight">
                 Ainda tem <span className="text-primary">Dúvidas?</span>
               </h2>
-              <p className="text-lg text-muted font-medium">
+              <p className="text-lg text-foreground/80 font-medium">
                 Caso não tenha encontrado o que procurava, envie sua pergunta diretamente para nosso time de engenharia.
               </p>
             </div>
@@ -170,8 +170,8 @@ export default function FAQPage() {
           </div>
         </div>
 
-        <div className="mt-32 pt-12 border-t border-slate-100 text-center">
-          <p className="text-sm text-muted font-medium italic">
+        <div className="mt-32 pt-12 border-t border-border text-center">
+          <p className="text-sm text-foreground/60 font-medium italic">
             CatchUp Tech  Todos os direitos reservados. Vigência 2026.
           </p>
         </div>

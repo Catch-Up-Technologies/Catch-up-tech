@@ -36,7 +36,7 @@ export const SectionHeader = ({
       />
       {description && (
         <p
-          className={`text-lg font-medium leading-relaxed max-w-2xl ${light ? "text-slate-400" : "text-slate-500"
+          className={`text-lg font-medium leading-relaxed max-w-2xl ${light ? "text-white/60" : "text-muted"
             } ${isCenter ? "mx-auto" : "mr-auto"}`}
         >
           {description}

@@ -63,8 +63,9 @@ export const Contact = () => {
   ];
 
   return (
-    <section id="contact" className="section-padding bg-zinc-50 relative overflow-hidden">
-      <div className="absolute inset-0 bg-[radial-gradient(#e5e7eb_1px,transparent_1px)] [background-size:24px_24px] opacity-40" />
+    <section id="contact" className="section-padding bg-background relative overflow-hidden">
+      {/* Background Texture */}
+      <div className="absolute inset-0 bg-[radial-gradient(var(--dot-pattern)_1px,transparent_1px)] [background-size:24px_24px]" />
 
       <motion.div
         initial="hidden"
@@ -98,7 +99,7 @@ export const Contact = () => {
                     whileTap={{ scale: 0.95 }}
                     target={item.link.startsWith("http") ? "_blank" : undefined}
                     rel={item.link.startsWith("http") ? "noopener noreferrer" : undefined}
-                    className="w-14 h-14 rounded-2xl bg-white shadow-premium flex items-center justify-center text-primary group-hover:bg-primary group-hover:text-white transition-all duration-500 cursor-pointer flex-shrink-0"
+                    className="w-14 h-14 rounded-2xl bg-card-muted shadow-premium flex items-center justify-center text-primary group-hover:bg-primary group-hover:text-white transition-all duration-500 cursor-pointer flex-shrink-0 border border-border"
                   >
                     <item.icon className="w-6 h-6" />
                   </motion.a>
@@ -109,8 +110,7 @@ export const Contact = () => {
                     <a
                       href={item.link}
                       target={item.link.startsWith("http") ? "_blank" : undefined}
-                      rel={item.link.startsWith("http") ? "noopener noreferrer" : undefined}
-                      className="text-lg sm:text-xl font-black text-secondary tracking-tight hover:text-primary transition-colors"
+                      className="text-lg sm:text-xl font-black text-foreground tracking-tight hover:text-primary transition-colors"
                     >
                       {item.value}
                     </a>

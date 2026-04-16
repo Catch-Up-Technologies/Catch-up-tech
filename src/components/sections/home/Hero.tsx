@@ -13,6 +13,9 @@ export const Hero = () => {
   };
   return (
     <section id="home" className="relative overflow-hidden mesh-gradient min-h-[95vh] flex items-center">
+      {/* Background Texture */}
+      <div className="absolute inset-0 bg-[radial-gradient(var(--dot-pattern)_1px,transparent_1px)] [background-size:24px_24px]" />
+
       <div className="section-padding pt-32 lg:pt-40 flex flex-col lg:flex-row items-center gap-16 max-w-7xl mx-auto w-full relative z-10">
         <div className="flex-1 text-center lg:text-left space-y-8">
 

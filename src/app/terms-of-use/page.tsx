@@ -23,15 +23,15 @@ export default function TermsOfUsePage() {
           <ul className="list-none space-y-3">
             <li className="flex items-start gap-3">
               <div className="mt-2 w-1.5 h-1.5 rounded-full bg-primary shrink-0" />
-              <p><span className="font-bold text-secondary">Dados de Identificação:</span> Nome de usuário ou e-mail e telefone (se aplicável ao login).</p>
+              <p><span className="font-bold text-foreground">Dados de Identificação:</span> Nome de usuário ou e-mail e telefone (se aplicável ao login).</p>
             </li>
             <li className="flex items-start gap-3">
               <div className="mt-2 w-1.5 h-1.5 rounded-full bg-primary shrink-0" />
-              <p><span className="font-bold text-secondary">Logs de Sistema:</span> Informações técnicas coletadas automaticamente para diagnóstico de erros e melhoria contínua de performance.</p>
+              <p><span className="font-bold text-foreground">Logs de Sistema:</span> Informações técnicas coletadas automaticamente para diagnóstico de erros e melhoria contínua de performance.</p>
             </li>
             <li className="flex items-start gap-3">
               <div className="mt-2 w-1.5 h-1.5 rounded-full bg-primary shrink-0" />
-              <p><span className="font-bold text-secondary">Dados de Uso:</span> Preferências de interface e configurações salvas localmente para otimizar sua experiência.</p>
+              <p><span className="font-bold text-foreground">Dados de Uso:</span> Preferências de interface e configurações salvas localmente para otimizar sua experiência.</p>
             </li>
           </ul>
         </div>
@@ -92,7 +92,7 @@ export default function TermsOfUsePage() {
             Estes termos podem ser atualizados periodicamente para refletir melhorias técnicas ou mudanças regulatórias. Recomendamos a revisão constante deste documento.
           </p>
           <p className="pt-4">
-            Em caso de dúvidas técnicas ou jurídicas, entre em contato: <a href="mailto:catchuptech@outlook.com" className="text-secondary font-bold hover:text-primary transition-colors">catchuptech@outlook.com</a>
+            Em caso de dúvidas técnicas ou jurídicas, entre em contato: <a href="mailto:catchuptech@outlook.com" className="text-foreground font-bold hover:text-primary transition-colors">catchuptech@outlook.com</a>
           </p>
         </div>
       ),
@@ -100,7 +100,7 @@ export default function TermsOfUsePage() {
   ];
 
   return (
-    <main className="min-h-screen bg-white">
+    <main className="min-h-screen bg-background">
       {/* Header */}
       <div className="bg-secondary border-b border-white/5 py-20 lg:py-32">
         <div className="max-w-4xl mx-auto px-6">
@@ -108,9 +108,9 @@ export default function TermsOfUsePage() {
             Termos de Uso <br />
             <span className="text-primary">e Condições de Serviço</span>
           </h1>
-          <div className="flex items-center gap-4 text-slate-300 font-medium">
+          <div className="flex items-center gap-4 text-muted font-medium">
             <span>CatchUp Tech</span>
-            <div className="w-1 h-1 rounded-full bg-slate-500" />
+            <div className="w-1 h-1 rounded-full bg-muted/30" />
             <span>Última atualização: Abril de 2026</span>
           </div>
         </div>
@@ -119,33 +119,33 @@ export default function TermsOfUsePage() {
       {/* Content */}
       <div className="max-w-4xl mx-auto px-6 py-16 lg:py-24">
         <div className="prose prose-slate max-w-none">
-          <p className="text-xl text-muted leading-relaxed font-medium mb-16">
-            Ao utilizar nossos serviços, você concorda com os termos estabelecidos a seguir. A CatchUp Tech prioriza a <span className="text-secondary font-bold">Transparência Ética</span> e a <span className="text-secondary font-bold">Segurança Digital</span> como base de todas as nossas soluções de software.
+          <p className="text-xl text-foreground/90 leading-relaxed font-medium mb-16">
+            Ao utilizar nossos serviços, você concorda com os termos estabelecidos a seguir. A CatchUp Tech prioriza a <span className="text-foreground font-bold">Transparência Ética</span> e a <span className="text-foreground font-bold">Segurança Digital</span> como base de todas as nossas soluções de software.
           </p>
 
           <div className="space-y-16">
             {sections.map((section, index) => (
               <div key={index}>
                 <section className="space-y-8">
-                  <h2 className="text-2xl lg:text-3xl font-bold text-secondary tracking-tight uppercase px-0 border-none">
+                  <h2 className="text-2xl lg:text-3xl font-bold text-foreground tracking-tight uppercase px-0 border-none">
                     {section.title}
                   </h2>
-                  <div className="text-muted text-lg leading-relaxed font-medium">
+                  <div className="text-foreground/80 text-lg leading-relaxed font-medium">
                     {section.content}
                   </div>
                 </section>
                 {index < sections.length - 1 && (
-                  <hr className="mt-16 border-slate-100" />
+                  <hr className="mt-16 border-border" />
                 )}
               </div>
             ))}
           </div>
         </div>
 
-        <div className="mt-32 pt-12 border-t border-slate-100 flex flex-col items-center gap-2 text-sm text-muted font-medium">
+        <div className="mt-32 pt-12 border-t border-border flex flex-col items-center gap-2 text-sm text-foreground/60 font-medium">
           <p>Última atualização: Abril de 2026</p>
-          <p>Responsável: <span className="text-secondary font-bold">Administração Catch Up</span></p>
-          <p>E-mail: <a href="mailto:catchuptech@outlook.com" className="text-primary hover:text-secondary transition-colors font-bold">catchuptech@outlook.com</a></p>
+          <p>Responsável: <span className="text-foreground font-bold">Administração Catch Up</span></p>
+          <p>E-mail: <a href="mailto:catchuptech@outlook.com" className="text-primary hover:text-foreground transition-colors font-bold">catchuptech@outlook.com</a></p>
         </div>
       </div>
     </main>

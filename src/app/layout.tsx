@@ -46,7 +46,7 @@ export const metadata: Metadata = {
     images: [siteConfig.ogImage],
   },
   icons: {
-    icon: "/logo.png",
+    icon: "/logo.svg",
     apple: "/logo.png",
   },
   robots: {
@@ -54,6 +54,8 @@ export const metadata: Metadata = {
     follow: true,
   },
 };
+
+import { ThemeProvider } from "@/components/providers/ThemeProvider";
 
 export default function RootLayout({
   children,
@@ -63,13 +65,21 @@ export default function RootLayout({
   return (
     <html
       lang="pt-br"
-      className={`${geistSans.variable} ${geistMono.variable} h-full antialiased dark`}
+      className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
+      suppressHydrationWarning
     >
-      <body className="min-h-full flex flex-col bg-mesh">
-        <ScrollToTop />
-        <Navbar />
-        {children}
-        <Footer />
+      <body className="min-h-full flex flex-col bg-background transition-colors duration-300">
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="system"
+          enableSystem
+          disableTransitionOnChange
+        >
+          <ScrollToTop />
+          <Navbar />
+          {children}
+          <Footer />
+        </ThemeProvider>
       </body>
     </html>
   );

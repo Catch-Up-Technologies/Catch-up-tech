@@ -8,7 +8,7 @@ import { Contact } from "@/components/sections/enterprise/Contact";
 
 export default function EnterprisePage() {
   return (
-    <main className="min-h-screen bg-white">
+    <main className="min-h-screen bg-background">
       <About />
       <Guidelines />
       <Partners />
