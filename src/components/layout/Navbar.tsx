@@ -73,9 +73,12 @@ export const Navbar = () => {
   return (
     <>
       <button
+        id="mobile-menu-toggle"
+        aria-controls="mobile-menu-dialog"
+        aria-expanded={isMobileMenuOpen}
         onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-        className="fixed left-6 top-6 z-[110] lg:hidden w-12 h-12 rounded-full bg-background/80 backdrop-blur-xl border border-border/40 shadow-xl flex items-center justify-center text-secondary hover:scale-110 active:scale-95 transition-all"
-        aria-label="Toggle Menu"
+        className="fixed left-6 top-6 z-[110] lg:hidden w-12 h-12 rounded-full bg-background/80 backdrop-blur-xl border border-border/40 shadow-xl flex items-center justify-center text-foreground hover:scale-110 active:scale-95 transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary"
+        aria-label="Toggle navigation menu"
       >
         {isMobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
       </button>
@@ -112,11 +115,11 @@ export const Navbar = () => {
 
                   <div className="relative">
                     <item.icon
-                      className={`w-5 h-5 transition-colors duration-300 ${isActive ? "text-primary" : "text-muted group-hover:text-secondary"
+                      className={`w-5 h-5 transition-colors duration-300 ${isActive ? "text-primary" : "text-muted group-hover:text-foreground"
                         }`}
                     />
                     {hasSubItems && (
-                      <ChevronRight className="absolute -right-3 top-1/2 -translate-y-1/2 w-2.5 h-2.5 text-slate-400 opacity-0 group-hover:opacity-100 transition-opacity" />
+                      <ChevronRight className="absolute -right-3 top-1/2 -translate-y-1/2 w-2.5 h-2.5 text-muted opacity-0 group-hover:opacity-100 transition-opacity" />
                     )}
                   </div>
 
@@ -139,7 +142,7 @@ export const Navbar = () => {
                           key={sIdx}
                           href={sub.href}
                           onClick={() => handleLinkClick(sub)}
-                          className="text-xs font-bold text-secondary hover:text-primary transition-colors whitespace-nowrap flex items-center justify-between group/sub"
+                          className="text-xs font-bold text-foreground hover:text-primary transition-colors whitespace-nowrap flex items-center justify-between group/sub"
                         >
                           {sub.label}
                           <ChevronRight className="w-3 h-3 opacity-0 group-hover/sub:opacity-100 -translate-x-2 group-hover/sub:translate-x-0 transition-all" />
@@ -159,11 +162,17 @@ export const Navbar = () => {
       </nav>
 
       {isMobileMenuOpen && (
-        <div
-          className="fixed inset-0 bg-black/5 backdrop-blur-sm z-[90] lg:hidden animate-in fade-in duration-300"
-          onClick={() => setIsMobileMenuOpen(false)}
-        />
-      )}
+          <dialog
+            id="mobile-menu-dialog"
+            open
+            className="fixed inset-0 bg-black/5 backdrop-blur-sm z-[90] lg:hidden animate-in fade-in duration-300"
+            onClick={(e) => {
+              if (e.target === e.currentTarget) setIsMobileMenuOpen(false);
+            }}
+          >
+            <div className="w-full h-full" />
+          </dialog>
+        )}
     </>
   );
 };
