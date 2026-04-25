@@ -24,6 +24,11 @@
   --bg-card-pure: #fafafa;
   --bg-card-muted: #f3f4f6;
   --dot-pattern: rgba(0, 38, 72, 0.1);
+
+  /* New Hero/Brand Tokens */
+  --brand-blue: #2571B8;
+  --hero-bg: #fafafa;
+  --hero-text: #0f172a;
 }
 
 .dark {
@@ -50,6 +55,11 @@
   --bg-card-pure: #1e293b;
   --bg-card-muted: #334155;
   --dot-pattern: rgba(148, 163, 184, 0.04);
+
+  /* New Hero/Brand Tokens */
+  --brand-blue: #38bdf8; /* Brighter for dark mode */
+  --hero-bg: #020617;
+  --hero-text: #ffffff;
 }
 
 @theme inline {
@@ -71,6 +81,10 @@
   --color-card-pure: var(--bg-card-pure);
   --color-card-muted: var(--bg-card-muted);
   --color-dot-pattern: var(--dot-pattern);
+
+  --color-brand-blue: var(--brand-blue);
+  --color-hero-bg: var(--hero-bg);
+  --color-hero-text: var(--hero-text);
 
   --font-sans: "Inter", var(--font-geist-sans);
   
@@ -122,6 +136,14 @@ body {
          bg-primary text-white hover:shadow-glow hover:-translate-y-0.5;
 }
 
+.btn-hero {
+  @apply h-[40px] px-8 flex items-center justify-center gap-4 
+         bg-[#2571B8] text-white rounded-full border border-white/10
+         text-[14px] font-medium uppercase leading-[20px] tracking-[0.7px]
+         transition-all duration-300 hover:brightness-110 active:scale-[0.98]
+         shadow-[0_10px_30px_rgba(37,113,184,0.25)] cursor-pointer;
+}
+
 .btn-secondary {
   @apply cursor-pointer transition-all duration-300 font-semibold rounded-xl px-8 py-3.5 
          inline-flex items-center justify-center gap-2 select-none active:scale-[0.98]
@@ -135,6 +157,10 @@ body {
 }
 
 /* --- Tipografia --- */
+.text-title-2 {
+  @apply text-[2.75rem] lg:text-[5rem] font-medium tracking-[-0.02em] leading-[1.1];
+}
+
 .title-main {
   @apply text-4xl lg:text-5xl font-black text-foreground leading-[1.1] tracking-tighter uppercase italic;
 }
