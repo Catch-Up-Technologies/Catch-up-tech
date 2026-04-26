@@ -1,8 +1,8 @@
 @import "tailwindcss";
 
 :root {
-  --background: #fafafa;
-  --foreground: #171717;
+  --background: #ffffff;
+  --foreground: #020617;
   --primary: #00a091;
   --primary-glow: rgba(0, 160, 145, 0.15);
   --secondary: #002648;
@@ -27,12 +27,13 @@
 
   /* New Hero/Brand Tokens */
   --brand-blue: #2571B8;
-  --hero-bg: #fafafa;
-  --hero-text: #0f172a;
+  --hero-bg: #ffffff;
+  --hero-text: #020617;
+  --hero-muted: #475569;
 }
 
 .dark {
-  --background: #0f172a;
+  --background: #020617;
   --foreground: #f1f5f9;
   --primary: #14b8a6;
   --primary-glow: rgba(20, 184, 166, 0.2);
@@ -57,9 +58,10 @@
   --dot-pattern: rgba(148, 163, 184, 0.04);
 
   /* New Hero/Brand Tokens */
-  --brand-blue: #38bdf8; /* Brighter for dark mode */
+  --brand-blue: #38bdf8;
   --hero-bg: #020617;
   --hero-text: #ffffff;
+  --hero-muted: #94a3b8;
 }
 
 @theme inline {
@@ -85,6 +87,7 @@
   --color-brand-blue: var(--brand-blue);
   --color-hero-bg: var(--hero-bg);
   --color-hero-text: var(--hero-text);
+  --color-hero-muted: var(--hero-muted);
 
   --font-sans: "Inter", var(--font-geist-sans);
   
@@ -159,6 +162,10 @@ body {
 /* --- Tipografia --- */
 .text-title-2 {
   @apply text-[2.75rem] lg:text-[5rem] font-medium tracking-[-0.02em] leading-[1.1];
+}
+
+.text-h5 {
+  @apply text-[1.25rem] lg:text-[1.5rem] font-medium tracking-tight leading-tight;
 }
 
 .title-main {

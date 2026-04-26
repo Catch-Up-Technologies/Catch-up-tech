@@ -44,8 +44,7 @@ export const Hero = () => {
             >
               Transformamos Ideias
               <span
-                className="block font-medium mt-1 transition-colors duration-500"
-                style={{ color: isDark ? "rgba(148,163,184,0.60)" : "rgba(30,58,138,0.60)" }}
+                className="block font-medium mt-1 transition-colors duration-500 text-hero-muted"
               >
                 Em Soluções Digitais
               </span>

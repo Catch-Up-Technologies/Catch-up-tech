@@ -1,141 +1,79 @@
 "use client";
 
-import { SectionHeader } from "@/components/ui/SectionHeader";
 import { motion } from "framer-motion";
-import { useState } from "react";
+import { useTheme } from "next-themes";
+import { useEffect, useState } from "react";
 
-interface PartnerItem {
-  name: string;
-  desc: string;
-  prominent: boolean;
-}
-
-interface MarqueeRowProps {
-  items: PartnerItem[];
-  direction?: "left" | "right";
-  speed?: number;
-  className?: string;
-  pauseOnHover?: boolean;
-}
+const PARTNERS = [
+  { name: "AEL" },
+  { name: "Blutrafos" },
+  { name: "CEMAR" },
+  { name: "COM TRAFO" },
+  { name: "ZAGO" },
+  { name: "LIGHT" },
+  { name: "ENERGISA" },
+  { name: "WEG" },
+  { name: "CPFL" },
+  { name: "EMBRASTEC" },
+  { name: "IIB" },
+  { name: "TRAE" },
+];
 
 export const Partners = () => {
-  const content = {
-    title: "Nossos Parceiros",
-    desc: "Trabalhamos com empresas que confiaram em nosso trabalho para construir soluções digitais eficientes e preparadas para crescer.",
-  };
+  const { resolvedTheme } = useTheme();
+  const [mounted, setMounted] = useState(false);
+  useEffect(() => setMounted(true), []);
 
-  const partners = [
-    { name: "CalibraFlow", desc: "Setor de Energia e Óleo", prominent: true },
-    { name: "Unilab", desc: "Saúde e Hemocentro Animal", prominent: true },
-    { name: "DuAutomações", desc: "Automação e Segurança", prominent: true },
-    { name: "DrPet", desc: "Gestão de Centros Pet", prominent: true }
-  ];
-
-  const duplicatedPartners: PartnerItem[] = [...partners, ...partners, ...partners, ...partners];
-
-  const MarqueeRow = ({ 
-    items, 
-    direction = "left", 
-    speed = 40, 
-    className = "", 
-    pauseOnHover = false 
-  }: MarqueeRowProps) => {
-    const [isPaused, setIsPaused] = useState(false);
-
-    return (
-      <div
-        className="flex overflow-hidden select-none py-4"
-        onMouseEnter={() => pauseOnHover && setIsPaused(true)}
-        onMouseLeave={() => pauseOnHover && setIsPaused(false)}
-      >
-        <motion.div
-          className={`flex gap-12 lg:gap-20 whitespace-nowrap items-center w-max ${className}`}
-          animate={{ x: direction === "left" ? ["0%", "-50%"] : ["-50%", "0%"] }}
-          transition={{
-            duration: isPaused ? 1000000 : speed,
-            repeat: Infinity,
-            ease: "linear",
-          }}
-        >
-          {items.map((item, i) => (
-            <div
-              key={i}
-              className={`
-                group flex flex-col items-center justify-center transition-all duration-500
-                ${item.prominent ? "scale-110 opacity-100" : "scale-90 opacity-40"}
-                hover:!scale-125 hover:!opacity-100 cursor-default
-              `}
-            >
-              <span className={`
-                font-black tracking-tighter uppercase transition-colors duration-300
-                ${item.prominent ? "text-muted" : "text-muted/60"}
-                group-hover:text-primary
-                text-2xl lg:text-4xl
-              `}>
-                {item.name}
-              </span>
-
-              {pauseOnHover && (
-                <motion.span
-                  className="text-[10px] lg:text-xs font-bold text-primary opacity-0 group-hover:opacity-100 transition-opacity absolute -bottom-4 whitespace-nowrap"
-                >
-                  {item.desc}
-                </motion.span>
-              )}
-            </div>
-          ))}
-        </motion.div>
-      </div>
-    );
-  };
+  const isDark = mounted && resolvedTheme === "dark";
+  const doubledPartners = [...PARTNERS, ...PARTNERS];
 
   return (
-    <section id="partners" className="bg-card-muted/30 w-full py-32 overflow-hidden border-y border-border relative">
-      <div className="max-w-7xl mx-auto px-6 mb-24 text-center">
-        <SectionHeader
-          title={content.title}
-          description={content.desc}
-          align="center"
-        />
-      </div>
-
-      <div className="max-w-7xl mx-auto px-6 mb-8 lg:mb-12">
-        <motion.p
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 0.4 }}
-          transition={{ duration: 1 }}
-          className="text-[10px] lg:text-xs font-black uppercase tracking-[0.3em] text-center text-muted animate-bounce"
+    <section className="pt-20 lg:pt-28 pb-10 lg:pb-14 transition-colors duration-500 relative overflow-hidden">
+      <div className="container mx-auto px-6 relative z-10">
+        <motion.h2
+          initial={{ opacity: 0, y: 15 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="text-center text-h5 mb-20 text-hero-text opacity-80"
         >
-          Empresas que já confiaram no nosso trabalho
-        </motion.p>
-      </div>
+          Conheça algumas das empresas que utilizam nossas tecnologias
+        </motion.h2>
 
-      <div className="relative space-y-4 lg:space-y-12">
-        <div className="absolute left-0 top-0 bottom-0 w-24 lg:w-48 bg-gradient-to-r from-background to-transparent z-10 pointer-events-none" />
-        <div className="absolute right-0 top-0 bottom-0 w-24 lg:w-48 bg-gradient-to-l from-background to-transparent z-10 pointer-events-none" />
+        <div className="relative">
+          <div
+            className="absolute left-0 top-0 bottom-0 w-24 lg:w-48 z-20 pointer-events-none"
+            style={{ background: `linear-gradient(to right, var(--hero-bg) 0%, transparent 100%)` }}
+          />
+          <div
+            className="absolute right-0 top-0 bottom-0 w-24 lg:w-48 z-20 pointer-events-none"
+            style={{ background: `linear-gradient(to left, var(--hero-bg) 0%, transparent 100%)` }}
+          />
 
-        <MarqueeRow
-          items={duplicatedPartners}
-          direction="right"
-          speed={60}
-          className="text-muted font-black text-sm lg:text-xl opacity-10"
-        />
-
-        <MarqueeRow
-          items={duplicatedPartners}
-          direction="left"
-          speed={40}
-          pauseOnHover={true}
-          className="py-6"
-        />
-
-        <MarqueeRow
-          items={duplicatedPartners}
-          direction="right"
-          speed={60}
-          className="text-muted font-black text-sm lg:text-xl opacity-10"
-        />
+          <div className="flex overflow-hidden">
+            <motion.div
+              className="flex items-center gap-16 lg:gap-28 whitespace-nowrap py-6"
+              animate={{ x: [0, -100 * PARTNERS.length] }}
+              transition={{
+                duration: 50,
+                repeat: Infinity,
+                ease: "linear",
+              }}
+            >
+              {doubledPartners.map((partner, idx) => (
+                <div
+                  key={`${partner.name}-${idx}`}
+                  className="flex items-center justify-center min-w-[140px] lg:min-w-[180px] h-[31px] opacity-50 hover:opacity-100 transition-all duration-500 grayscale hover:grayscale-0"
+                >
+                  <span className="text-xl lg:text-3xl font-bold tracking-tighter text-hero-text">
+                    {partner.name}
+                  </span>
+                </div>
+              ))}
+            </motion.div>
+          </div>
+        </div>
       </div>
     </section>
   );
 };
+

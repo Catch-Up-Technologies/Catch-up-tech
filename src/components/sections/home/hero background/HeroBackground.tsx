@@ -46,8 +46,8 @@ export const HeroBackground = ({ isDark = true }: { isDark?: boolean }) => {
         className="absolute inset-0 transition-all duration-500"
         style={{
           background: isDark
-            ? "radial-gradient(ellipse at 70% 45%, #0a1e40 0%, #050e20 45%, #020914 100%)"
-            : "radial-gradient(ellipse at 70% 45%, #f1f5f9 0%, #fafafa 100%)",
+            ? "radial-gradient(ellipse at 70% 45%, rgba(10,30,64,0.3) 0%, rgba(2,6,23,0.8) 55%, var(--hero-bg) 100%)"
+            : "radial-gradient(ellipse at 70% 45%, #f8fafc 0%, var(--hero-bg) 100%)",
         }}
       />
       <canvas ref={canvasRef} className="absolute inset-0 w-full h-full" />
