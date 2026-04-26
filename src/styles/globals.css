@@ -9,6 +9,11 @@
   --accent: #2571b8;
   --muted: #6b7280;
   --border: #e5e7eb;
+
+  /* Navbar Colors */
+  --nav-active: #2571B8;
+  --nav-bg-light: #ffffff;
+  --nav-bg-dark: #010a31;
   --radius-lg: 1rem;
   --radius-xl: 2.5rem;
   --slate-soft: rgba(243, 244, 246, 0.5);
@@ -41,6 +46,11 @@
   --accent: #38bdf8;
   --muted: #94a3b8;
   --border: #334155;
+
+  /* Navbar Colors */
+  --nav-active: #2571B8;
+  --nav-bg-light: #ffffff;
+  --nav-bg-dark: #010a31;
   --radius-lg: 1rem;
   --radius-xl: 2.5rem;
   --slate-soft: rgba(30, 41, 59, 0.5);
@@ -58,7 +68,7 @@
   --dot-pattern: rgba(148, 163, 184, 0.04);
 
   /* New Hero/Brand Tokens */
-  --brand-blue: #38bdf8;
+  --brand-blue: #2571B8;
   --hero-bg: #020617;
   --hero-text: #ffffff;
   --hero-muted: #94a3b8;
@@ -85,6 +95,9 @@
   --color-dot-pattern: var(--dot-pattern);
 
   --color-brand-blue: var(--brand-blue);
+  --color-nav-active: var(--nav-active);
+  --color-nav-bg-light: var(--nav-bg-light);
+  --color-nav-bg-dark: var(--nav-bg-dark);
   --color-hero-bg: var(--hero-bg);
   --color-hero-text: var(--hero-text);
   --color-hero-muted: var(--hero-muted);
