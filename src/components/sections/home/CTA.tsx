@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 import { useTheme } from "next-themes";
 import { useEffect, useState } from "react";
 import { Button } from "@/components/ui/Button";
+import { SectionHeader } from "@/components/ui/SectionHeader";
 
 export const CTA = () => {
   const { theme, resolvedTheme } = useTheme();
@@ -18,8 +19,16 @@ export const CTA = () => {
   return (
     <section className={`py-24 lg:py-32 w-full relative overflow-hidden ${isDark ? "bg-background" : "bg-white"}`}>
       {/* Background patterns */}
-      <div className="absolute inset-0 z-0 pointer-events-none opacity-40">
-        <div className={`absolute top-0 left-1/2 -translate-x-1/2 w-[1000px] h-[600px] blur-[120px] rounded-full ${isDark ? "bg-brand-blue/10" : "bg-brand-blue/5"}`} />
+      <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden">
+        <div 
+          className="absolute inset-0 transition-all duration-700"
+          style={{
+            background: isDark
+              ? "radial-gradient(circle at 50% 50%, rgba(37,113,184,0.12) 0%, rgba(2,6,23,0) 70%)"
+              : "radial-gradient(circle at 50% 50%, rgba(37,113,184,0.06) 0%, rgba(255,255,255,0) 70%)",
+          }}
+        />
+        <div className={`absolute inset-0 opacity-[0.15] ${isDark ? "mesh-gradient" : "mesh-gradient"}`} />
       </div>
 
       <div className="max-w-4xl mx-auto px-6 relative z-10 text-center">
@@ -28,30 +37,24 @@ export const CTA = () => {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
-          className="flex flex-col items-center gap-8"
+          className="flex flex-col items-center"
         >
-          {/* Badge */}
-          <div className="inline-flex items-center px-4 py-1.5 rounded-full bg-[#E0F2FE] border border-transparent">
-            <span className="text-[12px] font-bold tracking-[0.05em] uppercase text-[#0369A1]">
-              Pronto para evoluir?
-            </span>
-          </div>
-
-          {/* Title */}
-          <h2 className={`text-4xl lg:text-[52px] font-black leading-[1.1] tracking-tight ${isDark ? "text-white" : "text-[#111827]"}`}>
-            Sua operação merece <br className="hidden sm:block" /> engenharia de verdade
-          </h2>
-
-          {/* Description */}
-          <p className={`text-lg lg:text-xl leading-relaxed max-w-2xl font-medium ${isDark ? "text-slate-400" : "text-[#4B5563]"}`}>
-            Pare de remendar sistemas legados. Agende uma conversa direta com nossos engenheiros seniores.
-          </p>
+          <SectionHeader
+            badge="Pronto para evoluir?"
+            title="Sua operação merece engenharia de verdade"
+            description="Pare de remendar sistemas legados. Agende uma conversa direta com nossos engenheiros seniores."
+            align="center"
+            hideLine={true}
+            titleClassName={`!text-4xl lg:!text-[60px] !font-bold !leading-[60px] !tracking-[-1.5px] ${isDark ? "!text-white" : "!text-[#111827]"}`}
+            descClassName={`!mb-8 !text-[20px] !leading-[28px] !font-normal tracking-normal ${isDark ? "!text-slate-400" : "!text-[#4B5563]"}`}
+            className="!mb-0"
+          />
 
           {/* Button */}
           <Button
             variant="brand"
             size="lg"
-            className="mt-4 rounded-full px-12"
+            className="rounded-full px-12"
           >
             Solicitar diagnóstico estratégico
           </Button>
