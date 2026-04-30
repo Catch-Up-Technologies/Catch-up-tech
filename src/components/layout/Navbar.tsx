@@ -15,6 +15,7 @@ export const Navbar = () => {
   const navRef = useRef<HTMLDivElement>(null);
   const { resolvedTheme } = useTheme();
   const [mounted, setMounted] = useState(false);
+  const [navVisible, setNavVisible] = useState(true);
 
   useEffect(() => {
     setMounted(true);
@@ -47,11 +48,25 @@ export const Navbar = () => {
       }
     };
 
+    const handleScroll = () => {
+      const scrolledPastTop = window.scrollY > 50;
+      if (!scrolledPastTop) {
+        setNavVisible(true);
+      } else {
+        setNavVisible(false);
+      }
+    };
+
     document.addEventListener("mousedown", handleClickOutside);
+    window.addEventListener("scroll", handleScroll);
+    
+    // Check initial scroll position
+    handleScroll();
 
     return () => {
       observer.disconnect();
       document.removeEventListener("mousedown", handleClickOutside);
+      window.removeEventListener("scroll", handleScroll);
     };
   }, []);
 
@@ -76,6 +91,10 @@ export const Navbar = () => {
     }
   };
 
+  const handleMouseEnter = () => {
+    setNavVisible(true);
+  };
+
   return (
     <>
       <button
@@ -89,10 +108,18 @@ export const Navbar = () => {
         {isMobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
       </button>
 
+      {/* Invisible Hover Zone for Desktop Navbar */}
+      <div 
+        className="fixed left-0 top-0 w-16 h-screen z-[99] hidden lg:block"
+        onMouseEnter={handleMouseEnter}
+      />
+
       <nav
         ref={navRef}
+        onMouseEnter={handleMouseEnter}
         className={`fixed left-6 lg:left-8 top-1/2 -translate-y-1/2 z-[100] transition-all duration-500 ease-out 
-          ${isMobileMenuOpen ? "translate-x-0 opacity-100" : "-translate-x-[200%] lg:translate-x-0 opacity-0 lg:opacity-100"}
+          ${isMobileMenuOpen ? "translate-x-0 opacity-100" : "-translate-x-[200%] opacity-0"}
+          ${navVisible ? "lg:translate-x-0 lg:opacity-100" : "lg:-translate-x-[200%] lg:opacity-0"}
         `}
       >
         <div className={`flex flex-col items-center ${isDark ? "bg-nav-bg-dark/90 dark:border-white/10 shadow-[0_0_60px_rgba(37,113,184,0.2)]" : "bg-nav-bg-light/90 border-slate-200 shadow-[0_30px_100px_rgba(0,0,0,0.25)]"} backdrop-blur-3xl border rounded-full py-6 px-3 gap-6 transition-all duration-500`}>
