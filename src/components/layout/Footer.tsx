@@ -146,15 +146,20 @@ export const Footer = () => {
             <div className="flex flex-col gap-6">
               <h4 className={`font-medium text-[22.1px] leading-[33.6px] tracking-[-0.48px] transition-colors duration-500 ${isDark ? 'text-white' : 'text-[#1F2937]'}`}>Socials</h4>
               <nav className="flex flex-col gap-4">
-                {["Instagram", "Linkedin"].map((item) => (
-                  <Link
-                    key={item}
-                    href="#"
-                    className={`font-medium text-[14.8px] leading-[24px] tracking-[-0.16px] transition-colors duration-500 ${isDark ? 'text-slate-400 hover:text-white' : 'text-[#6B7280] hover:text-[#1F2937]'}`}
-                  >
-                    {item}
-                  </Link>
-                ))}
+                <span 
+                  className={`font-medium text-[14.8px] leading-[24px] tracking-[-0.16px] cursor-not-allowed opacity-50 transition-colors duration-500 ${isDark ? 'text-slate-500' : 'text-slate-400'}`}
+                  title="Em breve"
+                >
+                  Instagram
+                </span>
+                <Link
+                  href="https://www.linkedin.com/company/catchup-tech"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className={`font-medium text-[14.8px] leading-[24px] tracking-[-0.16px] transition-colors duration-500 ${isDark ? 'text-slate-400 hover:text-white' : 'text-[#6B7280] hover:text-[#1F2937]'}`}
+                >
+                  Linkedin
+                </Link>
               </nav>
             </div>
           </div>
@@ -163,12 +168,17 @@ export const Footer = () => {
         {/* Bottom bar */}
         <div className={`pt-8 border-t flex flex-col md:flex-row justify-between items-center gap-8 transition-colors duration-500 ${isDark ? 'border-white/10' : 'border-[#E2E8F0]'}`}>
           <div className="flex items-center gap-6">
-            <Link href="https://linkedin.com" className="text-[#2571B8] hover:scale-110 transition-transform">
+            <Link 
+              href="https://www.linkedin.com/company/catchup-tech" 
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-[#2571B8] hover:scale-110 transition-transform"
+            >
               <LinkedinIcon />
             </Link>
-            <Link href="https://instagram.com" className="text-[#2571B8] hover:scale-110 transition-transform">
+            <div className="text-[#2571B8] opacity-50 cursor-not-allowed" title="Em breve">
               <InstagramIcon />
-            </Link>
+            </div>
           </div>
 
           <div className="flex items-center gap-3">
