@@ -41,7 +41,13 @@ export const HeroBackground = ({ isDark = true }: { isDark?: boolean }) => {
   }, [isDark]); // Re-init on theme change or just update? Actually isDark is passed to render.
 
   return (
-    <div className="absolute inset-0 z-0 overflow-hidden">
+    <div
+      className="absolute inset-0 z-0 overflow-hidden"
+      style={{
+        maskImage: "linear-gradient(to bottom, black 60%, transparent 85%)",
+        WebkitMaskImage: "linear-gradient(to bottom, black 80%, transparent 85%)",
+      }}
+    >
       <div
         className="absolute inset-0 transition-all duration-500"
         style={{
