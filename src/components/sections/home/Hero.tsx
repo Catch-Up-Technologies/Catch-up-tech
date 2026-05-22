@@ -1,80 +1,94 @@
 "use client";
 
-import Image from "next/image";
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/Button";
 import Link from "next/link";
+import { ChevronRight } from "lucide-react";
+import { HeroBackground } from "./hero background/HeroBackground";
+import { useTheme } from "next-themes";
+import { useEffect, useState } from "react";
 
 export const Hero = () => {
-  const content = {
-    title: "Transformamos ideias em soluções digitais",
-    desc: "Desenvolvemos aplicações sob medida com foco em performance, organização e evolução contínua, ajudando empresas a tirar projetos do papel e crescer com tecnologia.",
-    btn: "Solicitar orçamento",
-  };
+  const { resolvedTheme } = useTheme();
+  const [mounted, setMounted] = useState(false);
+  useEffect(() => setMounted(true), []);
+
+  const isDark = !mounted || resolvedTheme === "dark";
+
   return (
-    <section id="home" className="relative overflow-hidden mesh-gradient min-h-[95vh] flex items-center">
-      {/* Background Texture */}
-      <div className="absolute inset-0 bg-[radial-gradient(var(--dot-pattern)_1px,transparent_1px)] [background-size:24px_24px]" />
+    <section
+      id="home"
+      className="relative min-h-screen flex items-center overflow-hidden px-6 lg:px-32 transition-colors duration-500 bg-hero-bg"
+    >
+      <HeroBackground isDark={isDark} />
 
-      <div className="section-padding pt-32 lg:pt-40 flex flex-col lg:flex-row items-center gap-16 max-w-7xl mx-auto w-full relative z-10">
-        <div className="flex-1 text-center lg:text-left space-y-8">
+      {/* Overlay — left-side text contrast */}
+      <div
+        className="absolute inset-0 z-[1] pointer-events-none transition-all duration-500"
+        style={{
+          background: isDark
+            ? "linear-gradient(to right, var(--hero-bg) 28%, rgba(2,6,23,0.55) 55%, transparent)"
+            : "linear-gradient(to right, var(--hero-bg) 28%, rgba(250,250,250,0.60) 55%, transparent)",
+        }}
+      />
 
-          <motion.h1
-            initial={{ opacity: 0, x: -30 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: false }}
-            transition={{ duration: 0.8, ease: "easeOut" }}
-            className="title-main text-gradient italic"
+      <div className="max-w-5xl w-full relative z-10 flex flex-col items-start gap-12 lg:ml-16">
+        <div className="space-y-4">
+          <motion.div
+            initial={{ opacity: 0, y: 40 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
           >
-            {content.title}
-          </motion.h1>
+            <h1
+              className="text-title-2 transition-colors duration-500 text-hero-text"
+            >
+              Transformamos Ideias
+              <span
+                className="block font-medium mt-1 transition-colors duration-500 text-hero-muted"
+              >
+                Em Soluções Digitais
+              </span>
+            </h1>
+          </motion.div>
 
           <motion.p
-            initial={{ opacity: 0, x: -20 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: false }}
-            transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
-            className="text-lg text-muted max-w-xl leading-relaxed mx-auto lg:mx-0 font-medium"
-          >
-            {content.desc}
-          </motion.p>
-
-          <motion.div
             initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: false }}
-            transition={{ duration: 0.5, delay: 0.4 }}
-            className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start pt-6"
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
+            className="text-[10px] lg:text-[11px] max-w-sm leading-[1.8] font-medium tracking-[0.05em] transition-colors duration-500"
+            style={{ color: isDark ? "rgba(148,163,184,0.80)" : "rgba(30,64,175,0.70)" }}
           >
-            <Link href="#contact" className="no-underline">
-              <Button className="group flex items-center gap-2 text-base">
-                {content.btn}
-              </Button>
-            </Link>
-          </motion.div>
+            DESENVOLVEMOS APLICAÇÕES SOB MEDIDA COM FOCO EM PERFORMANCE, ORGANIZAÇÃO E EVOLUÇÃO CONTÍNUA, AJUDANDO EMPRESAS A TIRAR PROJETOS DO PAPEL E CRESCER COM TECNOLOGIA.
+          </motion.p>
         </div>
 
         <motion.div
-          initial={{ opacity: 0, scale: 0.95, x: 20 }}
-          whileInView={{ opacity: 1, scale: 1, x: 0 }}
-          viewport={{ once: false }}
-          transition={{ duration: 1, ease: "easeOut" }}
-          className="flex-1 relative w-full aspect-square lg:aspect-[3/2]"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.4 }}
         >
-          <div className="absolute inset-0 bg-primary/10 rounded-[2.5rem] blur-3xl -z-10 translate-x-8 translate-y-8 opacity-50" />
-          <div className="relative h-full w-full rounded-[1.5rem] overflow-hidden shadow-2xl animate-float">
-            <Image
-              src="/hero-main.png"
-              alt="Dashboard de Software Moderno"
-              fill
-              className="object-cover"
-              priority
-              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 50vw"
-            />
-          </div>
+          <Link href="#contact" className="no-underline">
+            <button className="btn-hero group">
+              Agende uma conversa estratégica
+              <ChevronRight className="w-4 h-4 transition-transform group-hover:translate-x-1.5" />
+            </button>
+          </Link>
         </motion.div>
       </div>
+
+      {/* Decorative glows */}
+      <div
+        className="absolute top-1/3 -right-20 w-[600px] h-[600px] rounded-full blur-[150px] pointer-events-none transition-colors duration-500"
+        style={{ backgroundColor: isDark ? "rgba(37,99,235,0.10)" : "rgba(37,99,235,0.06)" }}
+      />
+      <div
+        className="absolute bottom-1/4 left-1/4 w-[400px] h-[400px] rounded-full blur-[120px] pointer-events-none transition-colors duration-500"
+        style={{ backgroundColor: isDark ? "rgba(56,189,248,0.05)" : "rgba(56,189,248,0.04)" }}
+      />
     </section>
   );
 };
+
+
+
 

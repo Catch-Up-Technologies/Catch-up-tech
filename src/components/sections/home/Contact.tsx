@@ -39,33 +39,39 @@ const buttonPopVariants: Variants = {
   }
 };
 
+import { useTheme } from "next-themes";
+import { useEffect, useState } from "react";
+
 export const Contact = () => {
+  const { theme, resolvedTheme } = useTheme();
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  const isDark = mounted && (resolvedTheme === "dark" || theme === "dark");
+
   const content = {
-    title: "Vamos tirar sua ideia do papel",
+    title: "Vamos conversar",
     description: "Conte um pouco sobre o seu projeto e entraremos em contato para entender melhor suas necessidades e como podemos ajudar.",
-    email: "catchuptech@outlook.com",
-    phone: "+55 (19) 98234-1110",
+    email: "contato@catchuptech.com.br",
+    sede: "São Paulo, SP - Brasil",
+    atendimento: "Global / Remoto"
   };
 
-  const contactOptions = [
-    {
-      icon: Mail,
-      label: "Envie um email",
-      value: content.email,
-      link: `mailto:${content.email}`
-    },
-    {
-      icon: Phone,
-      label: "Entre em contato",
-      value: content.phone,
-      link: `https://wa.me/${content.phone.replace(/\D/g, "")}`
-    },
+  const contactInfo = [
+    { label: "EMAIL", value: content.email },
+    { label: "SEDE", value: content.sede },
+    { label: "ATENDIMENTO", value: content.atendimento },
   ];
 
   return (
-    <section id="contact" className="section-padding bg-background relative overflow-hidden">
-      {/* Background Texture */}
-      <div className="absolute inset-0 bg-[radial-gradient(var(--dot-pattern)_1px,transparent_1px)] [background-size:24px_24px]" />
+    <section id="contact" className="py-24 lg:py-32 w-full relative overflow-hidden transition-colors duration-500">
+      {/* Background patterns */}
+      <div className="absolute inset-0 z-0 pointer-events-none opacity-40">
+        <div className="absolute top-0 left-1/4 w-[800px] h-[500px] blur-[120px] rounded-full bg-brand-blue/5" />
+      </div>
 
       <motion.div
         initial="hidden"
@@ -76,45 +82,29 @@ export const Contact = () => {
       >
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
 
-          <div className="space-y-12">
-            <motion.div variants={itemVariants} className="space-y-6">
-              <h2 className="title-main text-gradient">
+          <div className="flex flex-col gap-6">
+            <motion.div variants={itemVariants} className="flex flex-col gap-6">
+              <h2 className={`text-5xl lg:text-[64px] font-bold leading-[1.1] tracking-tight transition-colors ${isDark ? "text-white" : "text-[#0F172A]"}`}>
                 {content.title}
               </h2>
-              <p className="text-muted text-base sm:text-lg font-medium leading-relaxed max-w-xl">
+              <p className={`text-xl lg:text-[22px] font-medium leading-relaxed max-w-xl transition-colors ${isDark ? "text-[#94A3B8]" : "text-[#475569]"}`}>
                 {content.description}
               </p>
             </motion.div>
 
-            <div className="space-y-8 pt-8">
-              {contactOptions.map((item, idx) => (
+            <div className="flex flex-col gap-6">
+              {contactInfo.map((item, idx) => (
                 <motion.div
                   key={idx}
-                  variants={buttonPopVariants}
-                  className="flex items-center gap-6 group relative"
+                  variants={itemVariants}
+                  className="flex items-start"
                 >
-                  <motion.a
-                    href={item.link}
-                    whileHover={{ scale: 1.1, rotate: 5 }}
-                    whileTap={{ scale: 0.95 }}
-                    target={item.link.startsWith("http") ? "_blank" : undefined}
-                    rel={item.link.startsWith("http") ? "noopener noreferrer" : undefined}
-                    className="w-14 h-14 rounded-2xl bg-card-muted shadow-premium flex items-center justify-center text-primary group-hover:bg-primary group-hover:text-white transition-all duration-500 cursor-pointer flex-shrink-0 border border-border"
-                  >
-                    <item.icon className="w-6 h-6" />
-                  </motion.a>
-                  <div>
-                    <p className="text-[10px] font-black text-primary uppercase tracking-[0.2em] mb-1 opacity-70">
-                      {item.label}
-                    </p>
-                    <a
-                      href={item.link}
-                      target={item.link.startsWith("http") ? "_blank" : undefined}
-                      className="text-lg sm:text-xl font-black text-foreground tracking-tight hover:text-primary transition-colors"
-                    >
-                      {item.value}
-                    </a>
-                  </div>
+                  <p className={`text-[13px] font-medium uppercase tracking-[0.1em] w-[130px] flex-shrink-0 transition-colors ${isDark ? "text-[#64748B]" : "text-[#94A3B8]"}`}>
+                    {item.label}:
+                  </p>
+                  <span className={`text-[13px] font-medium transition-colors ${isDark ? "text-[#94A3B8]" : "text-[#64748B]"}`}>
+                    {item.value}
+                  </span>
                 </motion.div>
               ))}
             </div>

@@ -3,11 +3,15 @@
 import { useEffect, useState } from "react";
 import { motion, Variants } from "framer-motion";
 import { SectionHeader } from "@/components/ui/SectionHeader";
+import { useTheme } from "next-themes";
 
 export const Methodology = () => {
   const [isMobile, setIsMobile] = useState(false);
+  const { theme, resolvedTheme } = useTheme();
+  const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
+    setMounted(true);
     const checkMobile = () => setIsMobile(window.innerWidth < 1024);
     checkMobile();
     window.addEventListener("resize", checkMobile);
@@ -79,18 +83,21 @@ export const Methodology = () => {
       transition,
     },
   };
+  const isDark = mounted && (resolvedTheme === "dark" || theme === "dark");
 
   return (
-    <section id="methodology" className="min-h-screen w-full bg-secondary text-white relative overflow-hidden flex items-center py-24 lg:py-0">
-      <div className="absolute top-0 right-0 w-[50rem] h-[50rem] bg-primary/10 blur-[150px] -translate-y-1/2 translate-x-1/2 pointer-events-none" />
-      <div className="absolute bottom-0 left-0 w-[40rem] h-[40rem] bg-primary/5 blur-[120px] translate-y-1/2 -translate-x-1/2 pointer-events-none" />
+    <section id="methodology" className={`min-h-screen w-full relative overflow-hidden flex items-center py-24 lg:py-0 transition-colors duration-500 ${isDark ? 'bg-white text-slate-900' : 'bg-[#020617] text-white'}`}>
+      <div className="absolute top-0 right-0 w-[50rem] h-[50rem] bg-brand-blue/10 blur-[150px] -translate-y-1/2 translate-x-1/2 pointer-events-none" />
+      <div className="absolute bottom-0 left-0 w-[40rem] h-[40rem] bg-brand-blue/5 blur-[120px] translate-y-1/2 -translate-x-1/2 pointer-events-none" />
 
       <div className="max-w-7xl mx-auto relative z-10 px-6 w-full">
         <SectionHeader
+          badge="OBRAS SELECIONADAS"
           title={content.title}
           description={content.desc}
           align="center"
-          light={true}
+          light={!isDark}
+          inverted={isDark}
           className="mb-24"
         />
 
@@ -127,14 +134,14 @@ export const Methodology = () => {
                     ease: "easeInOut"
                   }
                 }}
-                className="text-[10rem] font-black text-white/[0.03] absolute -top-24 left-1/2 lg:left-0 -translate-x-1/2 lg:translate-x-0 select-none pointer-events-none group-hover:text-primary/10 transition-colors duration-700"
+                className={`text-[10rem] font-black absolute -top-12 left-1/2 lg:left-0 -translate-x-1/2 lg:translate-x-0 select-none pointer-events-none group-hover:text-brand-blue/10 transition-colors duration-700 leading-none ${isDark ? 'text-[#e1dffd]/[0.6]' : 'text-white/[0.03]'}`}
               >
                 {step.num}
               </motion.div>
 
               <div className="relative flex items-center justify-center w-full lg:justify-start mb-12">
                 {i < steps.length - 1 && (
-                  <div className="hidden lg:block absolute left-[calc(50%+2rem)] w-full h-[2px] z-0 overflow-hidden">
+                  <div className="hidden lg:block absolute left-[4rem] w-[calc(100%-4rem)] h-[2px] z-0 overflow-hidden ml-6">
                     <motion.div
                       variants={{
                         hidden: { width: 0 },
@@ -143,7 +150,7 @@ export const Methodology = () => {
                           transition: { delay: 1 + i * 0.2, duration: 1.5, ease: "easeInOut" }
                         }
                       }}
-                      className="h-full bg-gradient-to-r from-primary to-transparent opacity-30"
+                      className="h-full bg-gradient-to-r from-brand-blue to-transparent opacity-30"
                     />
                   </div>
                 )}
@@ -151,7 +158,7 @@ export const Methodology = () => {
                 <motion.div
                   variants={squareVariants}
                   whileHover={{ rotate: 6, scale: 1.05 }}
-                  className="relative z-10 w-16 h-16 bg-primary rounded-2xl flex items-center justify-center font-black text-xl shadow-xl shadow-primary/20"
+                  className="relative z-10 w-16 h-16 min-w-[4rem] bg-brand-blue rounded-2xl flex items-center justify-center font-black text-xl text-white shadow-xl shadow-brand-blue/20"
                 >
                   <motion.span
                     variants={numberVariants}
@@ -173,8 +180,8 @@ export const Methodology = () => {
                 }}
                 className="relative z-10 space-y-4"
               >
-                <h3 className="text-2xl font-black tracking-tight group-hover:text-primary transition-colors duration-300">{step.title}</h3>
-                <p className="text-zinc-300 leading-relaxed text-lg font-medium opacity-70 group-hover:opacity-100 transition-all duration-300">
+                <h3 className="text-2xl font-black tracking-tight group-hover:text-brand-blue transition-colors duration-300">{step.title}</h3>
+                <p className={`leading-relaxed text-lg font-medium opacity-70 group-hover:opacity-100 transition-all duration-300 ${isDark ? 'text-slate-500' : 'text-white/60'}`}>
                   {step.desc}
                 </p>
               </motion.div>

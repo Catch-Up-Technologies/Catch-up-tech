@@ -6,14 +6,19 @@ import { usePathname } from "next/navigation";
 import { Menu, X, ChevronRight } from "lucide-react";
 import { navigation } from "@/config/navigation";
 import { ThemeToggle } from "@/components/ui/ThemeToggle";
+import { useTheme } from "next-themes";
 
 export const Navbar = () => {
   const pathname = usePathname();
   const [activeSection, setActiveSection] = useState("home");
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const navRef = useRef<HTMLDivElement>(null);
+  const { resolvedTheme } = useTheme();
+  const [mounted, setMounted] = useState(false);
+  const [navVisible, setNavVisible] = useState(true);
 
   useEffect(() => {
+    setMounted(true);
     const sections = ["home", "services", "cases", "resources", "company", "contact"];
 
     const observerOptions = {
@@ -43,13 +48,29 @@ export const Navbar = () => {
       }
     };
 
+    const handleScroll = () => {
+      const scrolledPastTop = window.scrollY > 50;
+      if (!scrolledPastTop) {
+        setNavVisible(true);
+      } else {
+        setNavVisible(false);
+      }
+    };
+
     document.addEventListener("mousedown", handleClickOutside);
+    window.addEventListener("scroll", handleScroll);
+    
+    // Check initial scroll position
+    handleScroll();
 
     return () => {
       observer.disconnect();
       document.removeEventListener("mousedown", handleClickOutside);
+      window.removeEventListener("scroll", handleScroll);
     };
   }, []);
+
+  const isDark = mounted && resolvedTheme === "dark";
 
   const handleLinkClick = (item: { id?: string; href: string }) => {
     setIsMobileMenuOpen(false);
@@ -70,6 +91,10 @@ export const Navbar = () => {
     }
   };
 
+  const handleMouseEnter = () => {
+    setNavVisible(true);
+  };
+
   return (
     <>
       <button
@@ -83,13 +108,21 @@ export const Navbar = () => {
         {isMobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
       </button>
 
+      {/* Invisible Hover Zone for Desktop Navbar */}
+      <div 
+        className="fixed left-0 top-0 w-16 h-screen z-[99] hidden lg:block"
+        onMouseEnter={handleMouseEnter}
+      />
+
       <nav
         ref={navRef}
+        onMouseEnter={handleMouseEnter}
         className={`fixed left-6 lg:left-8 top-1/2 -translate-y-1/2 z-[100] transition-all duration-500 ease-out 
-          ${isMobileMenuOpen ? "translate-x-0 opacity-100" : "-translate-x-[200%] lg:translate-x-0 opacity-0 lg:opacity-100"}
+          ${isMobileMenuOpen ? "translate-x-0 opacity-100" : "-translate-x-[200%] opacity-0"}
+          ${navVisible ? "lg:translate-x-0 lg:opacity-100" : "lg:-translate-x-[200%] lg:opacity-0"}
         `}
       >
-        <div className="flex flex-col items-center bg-background/85 backdrop-blur-2xl border border-border/40 rounded-full py-8 px-4 gap-8 shadow-[0_20px_50px_rgba(0,0,0,0.2)] ring-1 ring-black/5">
+        <div className={`flex flex-col items-center ${isDark ? "bg-nav-bg-dark/90 dark:border-white/10 shadow-[0_0_60px_rgba(37,113,184,0.2)]" : "bg-nav-bg-light/90 border-slate-200 shadow-[0_30px_100px_rgba(0,0,0,0.25)]"} backdrop-blur-3xl border rounded-full py-6 px-3 gap-6 transition-all duration-500`}>
           {navigation.map((item) => {
             const isSubItemActive = item.subItems?.some(sub => {
               const subPath = sub.href.split('#')[0];
@@ -107,19 +140,19 @@ export const Navbar = () => {
                 <Link
                   href={item.href}
                   onClick={() => handleLinkClick(item)}
-                  className="flex flex-col items-center gap-1.5 transition-all duration-300 relative"
+                  className={`w-12 h-12 flex flex-col items-center justify-center rounded-full transition-all duration-300 relative ${isActive
+                    ? "bg-nav-active text-white shadow-[0_8px_20px_rgba(37,113,184,0.35)]"
+                    : isDark
+                      ? "text-white/40 hover:bg-white/5 hover:text-white"
+                      : "text-[#6B7280] hover:bg-slate-50 hover:text-slate-900"
+                    }`}
                 >
-                  {isActive && (
-                    <div className="absolute inset-0 -m-3 bg-primary/10 rounded-full animate-in fade-in zoom-in duration-300" />
-                  )}
-
                   <div className="relative">
                     <item.icon
-                      className={`w-5 h-5 transition-colors duration-300 ${isActive ? "text-primary" : "text-muted group-hover:text-foreground"
-                        }`}
+                      className="w-6 h-6 transition-colors duration-300"
                     />
                     {hasSubItems && (
-                      <ChevronRight className="absolute -right-3 top-1/2 -translate-y-1/2 w-2.5 h-2.5 text-muted opacity-0 group-hover:opacity-100 transition-opacity" />
+                      <ChevronRight className={`absolute -right-3 top-1/2 -translate-y-1/2 w-2.5 h-2.5 opacity-0 group-hover:opacity-100 transition-opacity ${isActive ? "text-white" : "text-muted"}`} />
                     )}
                   </div>
 
@@ -154,25 +187,27 @@ export const Navbar = () => {
               </div>
             );
           })}
-          
-          <div className="pt-4 mt-4 border-t border-border/20 w-full flex justify-center">
+
+          <div className={`pt-4 mt-2 border-t w-8 flex justify-center ${isDark ? "border-white/10" : "border-[#6B7280]/30"}`} />
+
+          <div className="flex justify-center">
             <ThemeToggle />
           </div>
         </div>
       </nav>
 
       {isMobileMenuOpen && (
-          <dialog
-            id="mobile-menu-dialog"
-            open
-            className="fixed inset-0 bg-black/5 backdrop-blur-sm z-[90] lg:hidden animate-in fade-in duration-300"
-            onClick={(e) => {
-              if (e.target === e.currentTarget) setIsMobileMenuOpen(false);
-            }}
-          >
-            <div className="w-full h-full" />
-          </dialog>
-        )}
+        <dialog
+          id="mobile-menu-dialog"
+          open
+          className="fixed inset-0 bg-black/5 backdrop-blur-sm z-[90] lg:hidden animate-in fade-in duration-300"
+          onClick={(e) => {
+            if (e.target === e.currentTarget) setIsMobileMenuOpen(false);
+          }}
+        >
+          <div className="w-full h-full" />
+        </dialog>
+      )}
     </>
   );
 };
