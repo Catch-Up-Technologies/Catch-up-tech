@@ -90,14 +90,14 @@ export const Services = () => {
             <motion.div
               key={i}
               variants={itemVariants}
-              className={`${item.span} group flex flex-col h-full bg-[#F8FAFC] dark:bg-white/[0.03] border border-slate-200/60 dark:border-white/5 rounded-[2.5rem] p-8 lg:p-12 hover:-translate-y-2 hover:shadow-[0_20px_40px_-15px_rgba(0,0,0,0.05)] dark:hover:shadow-[0_20px_40px_-15px_rgba(255,255,255,0.02)] transition-all duration-500`}
+              className={`${item.span} group flex flex-col h-full bg-slate-100 dark:bg-white/[0.03] border border-slate-200 dark:border-white/5 rounded-[2.5rem] p-8 lg:p-12 hover:-translate-y-2 hover:shadow-[0_20px_40px_-15px_rgba(0,0,0,0.05)] dark:hover:shadow-[0_20px_40px_-15px_rgba(255,255,255,0.02)] transition-all duration-500`}
             >
               <div className="relative w-full flex-1 min-h-[220px] md:min-h-[260px] lg:min-h-[300px] mb-10 flex items-center justify-center">
-                <Image 
-                  src={item.image} 
-                  alt={item.title} 
+                <Image
+                  src={item.image}
+                  alt={item.title}
                   fill
-                  className="object-contain object-center group-hover:scale-105 transition-transform duration-700 ease-out drop-shadow-2xl" 
+                  className="object-contain object-center group-hover:scale-105 transition-transform duration-700 ease-out drop-shadow-2xl"
                 />
               </div>
               <div className="flex flex-col justify-end mt-auto">

@@ -58,10 +58,10 @@ const FaqItem = ({ item, isOpen, onClick, isDark }: { item: typeof faqData[0], i
         onClick={onClick}
         className="w-full flex items-center justify-between gap-8 text-left group"
       >
-        <span className={`text-xl lg:text-[22px] font-normal leading-snug transition-colors ${isOpen ? (isDark ? 'text-brand-blue' : 'text-brand-blue') : (isDark ? 'text-white group-hover:text-white/80' : 'text-slate-800 group-hover:text-slate-600')}`}>
+        <span className={`text-xl lg:text-[22px] font-normal leading-snug transition-colors ${isDark ? 'text-white' : 'text-slate-800 group-hover:text-slate-600'}`}>
           {item.question}
         </span>
-        <div className={`shrink-0 transition-colors ${isOpen ? 'text-brand-blue' : 'text-brand-blue/60 group-hover:text-brand-blue'}`}>
+        <div className="shrink-0 text-brand-blue">
           {isOpen ? <Minus className="w-5 h-5" /> : <Plus className="w-5 h-5" />}
         </div>
       </button>
@@ -75,8 +75,8 @@ const FaqItem = ({ item, isOpen, onClick, isDark }: { item: typeof faqData[0], i
             transition={{ duration: 0.3, ease: "easeInOut" }}
             className="overflow-hidden"
           >
-            <div className={`mt-6 p-6 rounded-2xl ${isDark ? 'bg-white/5' : 'bg-slate-50'}`}>
-              <p className={`text-[17px] leading-relaxed ${isDark ? 'text-slate-400' : 'text-slate-600'}`}>
+            <div className="mt-4">
+              <p className={`text-[17px] leading-relaxed ${isDark ? 'text-white/70' : 'text-slate-600'}`}>
                 {item.answer}
               </p>
             </div>
