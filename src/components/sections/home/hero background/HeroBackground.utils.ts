@@ -25,10 +25,10 @@ export const drawStaticLayer = (
     sCtx.beginPath();
     trace.forEach(({ x, y }, i) => {
       const [tx, ty] = [x * W, y * H];
-      i === 0 ? sCtx.moveTo(tx, ty) : sCtx.lineTo(tx, ty);
+      if (i === 0) ctx.moveTo(tx, ty);
+      else ctx.lineTo(tx, ty);
     });
     sCtx.stroke();
-    // dots
     trace.forEach(({ x, y }) => {
       sCtx.beginPath();
       sCtx.arc(x * W, y * H, 1.8, 0, Math.PI * 2);
@@ -98,7 +98,8 @@ export const drawPanel = (
     for (let i = 0; i <= 14; i++) {
       const lx = x + 4 + (i / 14) * (w - 8);
       const ly = y + h * 0.72 - h * 0.42 * Math.sin(i * 0.6 + t * 0.22);
-      i === 0 ? ctx.moveTo(lx, ly) : ctx.lineTo(lx, ly);
+      if (i === 0) ctx.moveTo(lx, ly);
+      else ctx.lineTo(lx, ly);
     }
     ctx.strokeStyle = pColors.content;
     ctx.lineWidth = 1.8;

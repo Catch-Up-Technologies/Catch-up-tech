@@ -65,6 +65,7 @@ export const ContactFormFields = ({ subject = "Contato - Website" }: ContactForm
       }`}
     >
       <form onSubmit={handleSubmit} className="flex flex-col gap-8">
+        <input type="hidden" name="subject" value={subject} />
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
           <div>
             <label className={labelStyles}>Nome</label>

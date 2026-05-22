@@ -1,7 +1,8 @@
 "use client";
 
 import { motion, Variants } from "framer-motion";
-import { Mail, Phone } from "lucide-react";
+import { useTheme } from "next-themes";
+import { useEffect, useState } from "react";
 import { ContactFormFields } from "./ContactFormFields";
 
 const containerVariants: Variants = {
@@ -26,21 +27,6 @@ const itemVariants: Variants = {
     }
   }
 };
-
-const buttonPopVariants: Variants = {
-  hidden: { opacity: 0, scale: 0.8 },
-  visible: {
-    opacity: 1,
-    scale: 1,
-    transition: {
-      duration: 0.5,
-      ease: [0.34, 1.56, 0.64, 1] as const
-    }
-  }
-};
-
-import { useTheme } from "next-themes";
-import { useEffect, useState } from "react";
 
 export const Contact = () => {
   const { theme, resolvedTheme } = useTheme();

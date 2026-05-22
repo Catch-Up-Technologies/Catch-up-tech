@@ -23,11 +23,10 @@ const eslintConfig = defineConfig([
           "argsIgnorePattern": "^_" 
         },
       ],
+      "react-hooks/set-state-in-effect": "off",
     },
   },
-  // Override default ignores of eslint-config-next.
   globalIgnores([
-    // Default ignores of eslint-config-next:
     ".next/**",
     "out/**",
     "build/**",

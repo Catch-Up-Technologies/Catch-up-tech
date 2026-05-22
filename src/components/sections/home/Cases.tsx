@@ -1,13 +1,12 @@
 "use client";
 
-import { useEffect, useState, useCallback } from "react";
-import useEmblaCarousel from "embla-carousel-react";
-import { EmblaCarouselType } from "embla-carousel";
-import Image from "next/image";
-import { ArrowUpRight } from "lucide-react";
-import { motion } from "framer-motion";
 import { SectionHeader } from "@/components/ui/SectionHeader";
+import useEmblaCarousel from "embla-carousel-react";
+import { motion } from "framer-motion";
+import { ArrowUpRight } from "lucide-react";
 import { useTheme } from "next-themes";
+import Image from "next/image";
+import { useEffect, useState } from "react";
 
 const originalCases = [
   {
@@ -37,11 +36,10 @@ const originalCases = [
   },
 ];
 
-// Duplicate the cases to ensure Embla has enough slides to loop flawlessly
 const loopCases = [...originalCases, ...originalCases];
 
 export const Cases = () => {
-  const [emblaRef, emblaApi] = useEmblaCarousel({
+  const [emblaRef] = useEmblaCarousel({
     align: "center",
     loop: true,
     dragFree: false,
@@ -75,7 +73,7 @@ export const Cases = () => {
       <div className="relative mt-16 w-full max-w-7xl mx-auto px-6 flex flex-col items-center">
         {/* Gradiente Lateral Esquerdo */}
         <div className={`absolute left-0 top-0 bottom-0 w-16 sm:w-32 lg:w-48 z-10 pointer-events-none bg-gradient-to-r ${isDark ? 'from-background' : 'from-white'} to-transparent`} />
-        
+
         {/* Gradiente Lateral Direito */}
         <div className={`absolute right-0 top-0 bottom-0 w-16 sm:w-32 lg:w-48 z-10 pointer-events-none bg-gradient-to-l ${isDark ? 'from-background' : 'from-white'} to-transparent`} />
 
