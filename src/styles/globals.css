@@ -1,14 +1,19 @@
 @import "tailwindcss";
 
 :root {
-  --background: #fafafa;
-  --foreground: #171717;
+  --background: #ffffff;
+  --foreground: #020617;
   --primary: #00a091;
   --primary-glow: rgba(0, 160, 145, 0.15);
   --secondary: #002648;
   --accent: #2571b8;
   --muted: #6b7280;
   --border: #e5e7eb;
+
+  /* Navbar Colors */
+  --nav-active: #2571B8;
+  --nav-bg-light: #ffffff;
+  --nav-bg-dark: #010a31;
   --radius-lg: 1rem;
   --radius-xl: 2.5rem;
   --slate-soft: rgba(243, 244, 246, 0.5);
@@ -24,10 +29,16 @@
   --bg-card-pure: #fafafa;
   --bg-card-muted: #f3f4f6;
   --dot-pattern: rgba(0, 38, 72, 0.1);
+
+  /* New Hero/Brand Tokens */
+  --brand-blue: #2571B8;
+  --hero-bg: #ffffff;
+  --hero-text: #020617;
+  --hero-muted: #475569;
 }
 
 .dark {
-  --background: #0f172a;
+  --background: #020617;
   --foreground: #f1f5f9;
   --primary: #14b8a6;
   --primary-glow: rgba(20, 184, 166, 0.2);
@@ -35,6 +46,11 @@
   --accent: #38bdf8;
   --muted: #94a3b8;
   --border: #334155;
+
+  /* Navbar Colors */
+  --nav-active: #2571B8;
+  --nav-bg-light: #ffffff;
+  --nav-bg-dark: #010a31;
   --radius-lg: 1rem;
   --radius-xl: 2.5rem;
   --slate-soft: rgba(30, 41, 59, 0.5);
@@ -50,6 +66,12 @@
   --bg-card-pure: #1e293b;
   --bg-card-muted: #334155;
   --dot-pattern: rgba(148, 163, 184, 0.04);
+
+  /* New Hero/Brand Tokens */
+  --brand-blue: #2571B8;
+  --hero-bg: #020617;
+  --hero-text: #ffffff;
+  --hero-muted: #94a3b8;
 }
 
 @theme inline {
@@ -71,6 +93,14 @@
   --color-card-pure: var(--bg-card-pure);
   --color-card-muted: var(--bg-card-muted);
   --color-dot-pattern: var(--dot-pattern);
+
+  --color-brand-blue: var(--brand-blue);
+  --color-nav-active: var(--nav-active);
+  --color-nav-bg-light: var(--nav-bg-light);
+  --color-nav-bg-dark: var(--nav-bg-dark);
+  --color-hero-bg: var(--hero-bg);
+  --color-hero-text: var(--hero-text);
+  --color-hero-muted: var(--hero-muted);
 
   --font-sans: "Inter", var(--font-geist-sans);
   
@@ -122,6 +152,14 @@ body {
          bg-primary text-white hover:shadow-glow hover:-translate-y-0.5;
 }
 
+.btn-hero {
+  @apply h-[40px] px-8 flex items-center justify-center gap-4 
+         bg-[#2571B8] text-white rounded-full border border-white/10
+         text-[14px] font-medium uppercase leading-[20px] tracking-[0.7px]
+         transition-all duration-300 hover:brightness-110 active:scale-[0.98]
+         shadow-[0_10px_30px_rgba(37,113,184,0.25)] cursor-pointer;
+}
+
 .btn-secondary {
   @apply cursor-pointer transition-all duration-300 font-semibold rounded-xl px-8 py-3.5 
          inline-flex items-center justify-center gap-2 select-none active:scale-[0.98]
@@ -135,6 +173,14 @@ body {
 }
 
 /* --- Tipografia --- */
+.text-title-2 {
+  @apply text-[2.75rem] lg:text-[5rem] font-medium tracking-[-0.02em] leading-[1.1];
+}
+
+.text-h5 {
+  @apply text-[1.25rem] lg:text-[1.5rem] font-medium tracking-tight leading-tight;
+}
+
 .title-main {
   @apply text-4xl lg:text-5xl font-black text-foreground leading-[1.1] tracking-tighter uppercase italic;
 }

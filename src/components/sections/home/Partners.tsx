@@ -1,141 +1,156 @@
 "use client";
 
-import { SectionHeader } from "@/components/ui/SectionHeader";
 import { motion } from "framer-motion";
-import { useState } from "react";
+import { useTheme } from "next-themes";
+import { useEffect, useState } from "react";
 
-interface PartnerItem {
-  name: string;
-  desc: string;
-  prominent: boolean;
-}
+const PARTNERS = [
+  { name: "AEL" },
+  { name: "Blutrafos" },
+  { name: "CEMAR" },
+  { name: "COM TRAFO" },
+  { name: "ZAGO" },
+  { name: "LIGHT" },
+  { name: "ENERGISA" },
+  { name: "WEG" },
+  { name: "CPFL" },
+  { name: "EMBRASTEC" },
+  { name: "IIB" },
+  { name: "TRAE" },
+];
 
-interface MarqueeRowProps {
-  items: PartnerItem[];
-  direction?: "left" | "right";
-  speed?: number;
-  className?: string;
-  pauseOnHover?: boolean;
-}
+const PartnerLogo = ({ name }: { name: string }) => {
+  // Simple fictitious logo generators
+  const renderLogo = () => {
+    switch (name) {
+      case "AEL":
+        return (
+          <svg viewBox="0 0 100 40" className="h-8 w-auto fill-current">
+            <path d="M10 30L25 10L40 30H10Z" opacity="0.8" />
+            <rect x="45" y="10" width="10" height="20" rx="2" />
+            <rect x="60" y="10" width="20" height="20" rx="2" />
+          </svg>
+        );
+      case "Blutrafos":
+        return (
+          <svg viewBox="0 0 120 40" className="h-8 w-auto fill-current">
+            <circle cx="20" cy="20" r="15" opacity="0.6" />
+            <circle cx="35" cy="20" r="10" />
+            <rect x="55" y="15" width="60" height="10" rx="5" />
+          </svg>
+        );
+      case "CEMAR":
+        return (
+          <svg viewBox="0 0 100 40" className="h-8 w-auto fill-current">
+            <rect x="10" y="10" width="20" height="20" rx="10" opacity="0.7" />
+            <rect x="35" y="10" width="20" height="20" rx="2" />
+            <rect x="60" y="10" width="30" height="20" rx="2" />
+          </svg>
+        );
+      case "COM TRAFO":
+        return (
+          <svg viewBox="0 0 120 40" className="h-8 w-auto fill-current">
+            <path d="M10 20C10 10 20 10 30 20C40 30 50 30 60 20" stroke="currentColor" strokeWidth="4" fill="none" />
+            <rect x="70" y="10" width="40" height="20" rx="4" />
+          </svg>
+        );
+      case "ZAGO":
+        return (
+          <svg viewBox="0 0 100 40" className="h-8 w-auto fill-current">
+            <path d="M10 10H40L10 30H40" stroke="currentColor" strokeWidth="6" fill="none" strokeLinecap="round" />
+            <circle cx="70" cy="20" r="12" opacity="0.8" />
+          </svg>
+        );
+      case "LIGHT":
+        return (
+          <svg viewBox="0 0 100 40" className="h-8 w-auto fill-current">
+            <path d="M20 10L10 25H30L20 40" stroke="currentColor" strokeWidth="3" fill="none" />
+            <rect x="40" y="15" width="50" height="10" rx="2" />
+          </svg>
+        );
+      case "ENERGISA":
+        return (
+          <svg viewBox="0 0 120 40" className="h-8 w-auto fill-current">
+            <path d="M10 10V30L30 20Z" />
+            <path d="M40 10V30L60 20Z" opacity="0.6" />
+            <rect x="70" y="15" width="40" height="10" rx="2" />
+          </svg>
+        );
+      case "WEG":
+        return (
+          <svg viewBox="0 0 100 40" className="h-8 w-auto fill-current">
+            <rect x="10" y="10" width="80" height="20" rx="4" />
+            <path d="M25 15V25M50 15V25M75 15V25" stroke="white" strokeWidth="3" />
+          </svg>
+        );
+      case "CPFL":
+        return (
+          <svg viewBox="0 0 100 40" className="h-8 w-auto fill-current">
+            <path d="M10 20Q30 5 50 20T90 20" stroke="currentColor" strokeWidth="4" fill="none" />
+            <circle cx="50" cy="20" r="5" />
+          </svg>
+        );
+      default:
+        return (
+          <svg viewBox="0 0 100 40" className="h-8 w-auto fill-current">
+            <rect x="10" y="10" width="30" height="20" rx="4" opacity="0.5" />
+            <rect x="50" y="10" width="40" height="20" rx="4" />
+          </svg>
+        );
+    }
+  };
+
+  return <div className="text-[#64748B] dark:text-slate-400 group-hover:text-[#2571B8] transition-colors duration-300">{renderLogo()}</div>;
+};
 
 export const Partners = () => {
-  const content = {
-    title: "Nossos Parceiros",
-    desc: "Trabalhamos com empresas que confiaram em nosso trabalho para construir soluções digitais eficientes e preparadas para crescer.",
-  };
+  const { resolvedTheme } = useTheme();
+  const [mounted, setMounted] = useState(false);
+  useEffect(() => setMounted(true), []);
 
-  const partners = [
-    { name: "CalibraFlow", desc: "Setor de Energia e Óleo", prominent: true },
-    { name: "Unilab", desc: "Saúde e Hemocentro Animal", prominent: true },
-    { name: "DuAutomações", desc: "Automação e Segurança", prominent: true },
-    { name: "DrPet", desc: "Gestão de Centros Pet", prominent: true }
-  ];
-
-  const duplicatedPartners: PartnerItem[] = [...partners, ...partners, ...partners, ...partners];
-
-  const MarqueeRow = ({ 
-    items, 
-    direction = "left", 
-    speed = 40, 
-    className = "", 
-    pauseOnHover = false 
-  }: MarqueeRowProps) => {
-    const [isPaused, setIsPaused] = useState(false);
-
-    return (
-      <div
-        className="flex overflow-hidden select-none py-4"
-        onMouseEnter={() => pauseOnHover && setIsPaused(true)}
-        onMouseLeave={() => pauseOnHover && setIsPaused(false)}
-      >
-        <motion.div
-          className={`flex gap-12 lg:gap-20 whitespace-nowrap items-center w-max ${className}`}
-          animate={{ x: direction === "left" ? ["0%", "-50%"] : ["-50%", "0%"] }}
-          transition={{
-            duration: isPaused ? 1000000 : speed,
-            repeat: Infinity,
-            ease: "linear",
-          }}
-        >
-          {items.map((item, i) => (
-            <div
-              key={i}
-              className={`
-                group flex flex-col items-center justify-center transition-all duration-500
-                ${item.prominent ? "scale-110 opacity-100" : "scale-90 opacity-40"}
-                hover:!scale-125 hover:!opacity-100 cursor-default
-              `}
-            >
-              <span className={`
-                font-black tracking-tighter uppercase transition-colors duration-300
-                ${item.prominent ? "text-muted" : "text-muted/60"}
-                group-hover:text-primary
-                text-2xl lg:text-4xl
-              `}>
-                {item.name}
-              </span>
-
-              {pauseOnHover && (
-                <motion.span
-                  className="text-[10px] lg:text-xs font-bold text-primary opacity-0 group-hover:opacity-100 transition-opacity absolute -bottom-4 whitespace-nowrap"
-                >
-                  {item.desc}
-                </motion.span>
-              )}
-            </div>
-          ))}
-        </motion.div>
-      </div>
-    );
-  };
+  const isDark = mounted && resolvedTheme === "dark";
+  const doubledPartners = [...PARTNERS, ...PARTNERS];
 
   return (
-    <section id="partners" className="bg-card-muted/30 w-full py-32 overflow-hidden border-y border-border relative">
-      <div className="max-w-7xl mx-auto px-6 mb-24 text-center">
-        <SectionHeader
-          title={content.title}
-          description={content.desc}
-          align="center"
-        />
-      </div>
-
-      <div className="max-w-7xl mx-auto px-6 mb-8 lg:mb-12">
-        <motion.p
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 0.4 }}
-          transition={{ duration: 1 }}
-          className="text-[10px] lg:text-xs font-black uppercase tracking-[0.3em] text-center text-muted animate-bounce"
+    <section className="py-12 lg:py-16 bg-background transition-colors duration-500 overflow-hidden">
+      <div className="container mx-auto px-6 relative z-10">
+        <motion.h2
+          initial={{ opacity: 0, y: 15 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="text-center text-[16px] md:text-[18px] font-medium mb-12 text-slate-500/80 dark:text-slate-400 max-w-[753px] mx-auto px-[2px] leading-[30px]"
         >
-          Empresas que já confiaram no nosso trabalho
-        </motion.p>
-      </div>
+          Conheça algumas das empresas que utilizam nossas tecnologias
+        </motion.h2>
 
-      <div className="relative space-y-4 lg:space-y-12">
-        <div className="absolute left-0 top-0 bottom-0 w-24 lg:w-48 bg-gradient-to-r from-background to-transparent z-10 pointer-events-none" />
-        <div className="absolute right-0 top-0 bottom-0 w-24 lg:w-48 bg-gradient-to-l from-background to-transparent z-10 pointer-events-none" />
+        <div className="relative">
+          {/* Gradients matching the application background exactly */}
+          <div className={`absolute left-0 top-0 bottom-0 w-16 md:w-48 z-20 pointer-events-none bg-gradient-to-r ${isDark ? 'from-[#020617] to-transparent' : 'from-white to-transparent'}`} />
+          <div className={`absolute right-0 top-0 bottom-0 w-16 md:w-48 z-20 pointer-events-none bg-gradient-to-l ${isDark ? 'from-[#020617] to-transparent' : 'from-white to-transparent'}`} />
 
-        <MarqueeRow
-          items={duplicatedPartners}
-          direction="right"
-          speed={60}
-          className="text-muted font-black text-sm lg:text-xl opacity-10"
-        />
-
-        <MarqueeRow
-          items={duplicatedPartners}
-          direction="left"
-          speed={40}
-          pauseOnHover={true}
-          className="py-6"
-        />
-
-        <MarqueeRow
-          items={duplicatedPartners}
-          direction="right"
-          speed={60}
-          className="text-muted font-black text-sm lg:text-xl opacity-10"
-        />
+          <div className="flex overflow-hidden">
+            <motion.div
+              className="flex items-center gap-16 lg:gap-24 whitespace-nowrap"
+              animate={{ x: [0, -100 * PARTNERS.length] }}
+              transition={{
+                duration: 40,
+                repeat: Infinity,
+                ease: "linear",
+              }}
+            >
+              {doubledPartners.map((partner, idx) => (
+                <div
+                  key={`${partner.name}-${idx}`}
+                  className="flex items-center justify-center min-w-[120px] lg:min-w-[150px] h-[32px] opacity-50 grayscale hover:opacity-100 hover:grayscale-0 transition-all duration-500 group cursor-pointer"
+                >
+                  <PartnerLogo name={partner.name} />
+                </div>
+              ))}
+            </motion.div>
+          </div>
+        </div>
       </div>
     </section>
   );
 };
+
